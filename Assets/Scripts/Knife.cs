@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Knife : Weapon
 {
-    protected override void Attack()
+    public override void Attack()
     {
         // Do damage to target enemy withing 1.5 m
     }
@@ -18,7 +18,7 @@ public class Knife : Weapon
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButtonDown(0) && isEquiped)
+        if(Input.GetMouseButtonDown(0) && isEquipped)
         {
             Attack();
         }

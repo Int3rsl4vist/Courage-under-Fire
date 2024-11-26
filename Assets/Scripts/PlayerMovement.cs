@@ -23,7 +23,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Player state")]
     public Vector3 originalScale;
-    public float playerHeight;
+    public float playerHeight = 2f;
     public LayerMask groundLayer;
     public bool isGrounded;
     private bool readyToJump;
@@ -34,8 +34,8 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody rb;
 
     // Input variables
-    private float horInput;
-    private float verInput;
+    private float horInput = 0;
+    private float verInput = 0;
     private Vector3 moveDirection;
 
     // Speed settings for different stances
@@ -48,9 +48,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
-        originalScale = transform.localScale;
         rb = GetComponent<Rigidbody>();
-        readyToJump = true; // Initialize jump readiness
+        originalScale = transform.localScale;
+        readyToJump = true;
     }
 
     private void Update()
@@ -66,14 +66,13 @@ public class PlayerMovement : MonoBehaviour
     }
     private void CheckGroundStatus()
     {
-        isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight / 2 + 0.25f, groundLayer);
+        isGrounded = Physics.CheckSphere(transform.position, playerHeight / 2 + 0.25f, groundLayer);
         rb.drag = isGrounded ? groundDrag : 0;
     }
     public void CheckSlope()
     {
-        onSlope = Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, playerHeight / 2 + 0.25f)
-              ? Vector3.Angle(hit.normal, Vector3.up) <= 45f && Vector3.Angle(hit.normal, Vector3.up) > 0
-              : false;
+        onSlope = Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, playerHeight / 2 + 0.25f) 
+               && Vector3.Angle(hit.normal, Vector3.up) <= 45f && Vector3.Angle(hit.normal, Vector3.up) > 0;
     }
     private void UpdateStance()
     {
@@ -131,7 +130,7 @@ public class PlayerMovement : MonoBehaviour
 
         speedIndicator = Mathf.Clamp(speedIndicator, 0, 3);
 
-        if (Input.GetButton("Jump") && readyToJump && (isGrounded || onSlope))
+        if (Input.GetButton("Jump") && readyToJump)
         {
             currentStance = Stance.Standing;
             Debug.Log("Jumping");
@@ -143,17 +142,23 @@ public class PlayerMovement : MonoBehaviour
     private void MovePlayer()
     {
         moveDirection = playerRotation.forward * verInput + playerRotation.right * horInput;
-        float MoveSpeed = GetMoveSpeed(currentStance);
-        if(isGrounded)
-            rb.AddForce(5f * MoveSpeed * moveDirection.normalized, ForceMode.Force);
-        else if (onSlope)
+        if (horInput != 0 || verInput != 0)
         {
-            rb.AddForce(2.5f * MoveSpeed * moveDirection.normalized, ForceMode.Force);
-            rb.drag *= 2;
+            float MoveSpeed = GetMoveSpeed(currentStance);
+            if (isGrounded)
+                rb.AddForce(5f * MoveSpeed * moveDirection.normalized, ForceMode.Force);
+            else if (onSlope)
+            {
+                rb.AddForce(2.5f * MoveSpeed * moveDirection.normalized, ForceMode.Force);
+                rb.drag *= 2;
+            }
+            else if (!isGrounded && !onSlope)
+                rb.AddForce(5f * airMultiplier * MoveSpeed * moveDirection.normalized, ForceMode.Force);
         }
-        else if(!isGrounded && !onSlope)
-            rb.AddForce(5f * airMultiplier * MoveSpeed * moveDirection.normalized, ForceMode.Force);
-
+        else
+        {
+            rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, rb.velocity.z);
+        }
     }
     private float GetMoveSpeed(Stance stance)
     {
@@ -161,8 +166,11 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Jump()
     {
-        rb.velocity = new(rb.velocity.x, 0f, rb.velocity.z);
-        rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+        if (isGrounded || onSlope)
+        {
+            rb.velocity = new(rb.velocity.x, 0f, rb.velocity.z);
+            rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+        }
     }
     private void ResetJump()
     {
