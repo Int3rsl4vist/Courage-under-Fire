@@ -41,9 +41,9 @@ public class PlayerMovement : MonoBehaviour
     // Speed settings for different stances
     private readonly Dictionary<Stance, float[]> moveSpeeds = new()
     {
-        { Stance.Standing, new float[] { 5f, 10f, 15f, 18f } },
-        { Stance.Crouching, new float[] { 4f, 8f, 12f, 14f } },
-        { Stance.Lying, new float[] { 2f, 3f, 4f, 5f } }
+        { Stance.Standing, new float[] { 2.5f, 5f, 7.5f, 9f } },
+        { Stance.Crouching, new float[] { 2f, 4f, 6f, 7f } },
+        { Stance.Lying, new float[] { 1f, 1.5f, 2f, 2.5f } }
     };
 
     private void Start()
@@ -51,6 +51,9 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         originalScale = transform.localScale;
         readyToJump = true;
+        currentStance = Stance.Standing;
+        speedIndicator = 1;
+        moveSpeed = 5f;
     }
 
     private void Update()
@@ -59,9 +62,6 @@ public class PlayerMovement : MonoBehaviour
         HandleInput();
         UpdateStance();
         CheckSlope();
-    }
-    private void FixedUpdate()
-    {
         MovePlayer();
     }
     private void CheckGroundStatus()
@@ -146,7 +146,7 @@ public class PlayerMovement : MonoBehaviour
         {
             float MoveSpeed = GetMoveSpeed(currentStance);
             if (isGrounded)
-                rb.AddForce(5f * MoveSpeed * moveDirection.normalized, ForceMode.Force);
+                rb.AddForce(MoveSpeed * moveDirection.normalized, ForceMode.Force);
             else if (onSlope)
             {
                 rb.AddForce(2.5f * MoveSpeed * moveDirection.normalized, ForceMode.Force);
