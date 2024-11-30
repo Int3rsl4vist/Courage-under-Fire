@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
     protected enum Stance { Standing, Crouching, Lying }
     protected Stance currentStance = Stance.Standing;
     public int speedIndicator = 1;
-    private readonly float transitionSpeed = 4f;
+    public float transitionSpeed = 4f;
 
     [Header("Player state")]
     public Vector3 originalScale;
@@ -31,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
 
     // Player movement references
     public Transform playerRotation;
+    public Transform playerModel;
     private Rigidbody rb;
 
     // Input variables
@@ -99,8 +100,10 @@ public class PlayerMovement : MonoBehaviour
     }
     private void UpdateLyingState()
     {
+        Debug.Log(currentStance);
         transform.localScale = originalScale;
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(90, 0, 0), transitionSpeed * Time.deltaTime);
+        playerModel.transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(90, 0, 0), transitionSpeed * Time.deltaTime);
         isCrouching = false;
         isLying = true;
     }
