@@ -20,12 +20,12 @@ public class FPCam : MonoBehaviour
     }
     internal void Update()
     {
-        float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensitivityX;
-        float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensitivityY;
-
+        float mouseX = Input.GetAxis("Mouse X") * Time.deltaTime * sensitivityX;
+        float mouseY = Input.GetAxis("Mouse Y") * Time.deltaTime * sensitivityY;
         rotationY += mouseX;
         rotationX -= mouseY;
         rotationX = Mathf.Clamp(rotationX, -90f, 90f);
+        //Debug.Log($"{rotationX} | {rotationY}");
 
         transform.rotation = Quaternion.Euler(rotationX, rotationY, 0);
         playerRotation.rotation = Quaternion.Euler(0, rotationY, 0);

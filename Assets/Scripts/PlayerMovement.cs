@@ -54,7 +54,7 @@ public class PlayerMovement : MonoBehaviour
         readyToJump = true;
         currentStance = Stance.Standing;
         speedIndicator = 1;
-        moveSpeed = 5f;
+        moveSpeed = GetMoveSpeed(currentStance);
     }
 
     private void Update()
@@ -64,6 +64,7 @@ public class PlayerMovement : MonoBehaviour
         UpdateStance();
         CheckSlope();
         MovePlayer();
+        UpdateSpeed();
     }
     private void CheckGroundStatus()
     {
@@ -147,16 +148,15 @@ public class PlayerMovement : MonoBehaviour
         moveDirection = playerRotation.forward * verInput + playerRotation.right * horInput;
         if (horInput != 0 || verInput != 0)
         {
-            float MoveSpeed = GetMoveSpeed(currentStance);
             if (isGrounded)
-                rb.AddForce(MoveSpeed * moveDirection.normalized, ForceMode.Force);
+                rb.AddForce(moveSpeed * moveDirection.normalized, ForceMode.Force);
             else if (onSlope)
             {
-                rb.AddForce(2.5f * MoveSpeed * moveDirection.normalized, ForceMode.Force);
-                rb.drag *= 2;
+                rb.AddForce(5f * moveSpeed * moveDirection.normalized, ForceMode.Force);
+                //rb.drag *= 2;
             }
             else if (!isGrounded && !onSlope)
-                rb.AddForce(5f * airMultiplier * MoveSpeed * moveDirection.normalized, ForceMode.Force);
+                rb.AddForce(5f * airMultiplier * moveSpeed * moveDirection.normalized, ForceMode.Force);
         }
         else
         {
@@ -166,6 +166,10 @@ public class PlayerMovement : MonoBehaviour
     private float GetMoveSpeed(Stance stance)
     {
         return moveSpeeds[stance][Mathf.Clamp(speedIndicator, 0, moveSpeeds[stance].Length - 1)];
+    }
+    private void UpdateSpeed()
+    {
+        moveSpeed = GetMoveSpeed(currentStance);
     }
     private void Jump()
     {

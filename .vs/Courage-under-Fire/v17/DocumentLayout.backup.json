@@ -3,16 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\inter\\OneDrive\\Plocha\\Courage under Fire\\Courage-under-Fire\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{520A363F-370B-3A9B-B471-032BC54D316C}|Assembly-CSharp.csproj|c:\\users\\inter\\onedrive\\plocha\\courage under fire\\courage-under-fire\\assets\\scripts\\playermovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{520A363F-370B-3A9B-B471-032BC54D316C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\playermovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{520A363F-370B-3A9B-B471-032BC54D316C}|Assembly-CSharp.csproj|c:\\users\\inter\\onedrive\\plocha\\courage under fire\\courage-under-fire\\assets\\scripts\\asset scripts\\ladder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{520A363F-370B-3A9B-B471-032BC54D316C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\asset scripts\\ladder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{520A363F-370B-3A9B-B471-032BC54D316C}|Assembly-CSharp.csproj|c:\\users\\inter\\onedrive\\plocha\\courage under fire\\courage-under-fire\\assets\\scripts\\fpcam.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{520A363F-370B-3A9B-B471-032BC54D316C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\fpcam.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{520A363F-370B-3A9B-B471-032BC54D316C}|Assembly-CSharp.csproj|C:\\Users\\inter\\OneDrive\\Plocha\\Courage under Fire\\Courage-under-Fire\\assets\\scripts\\weapon scripts\\lmg.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{520A363F-370B-3A9B-B471-032BC54D316C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\weapon scripts\\lmg.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{520A363F-370B-3A9B-B471-032BC54D316C}|Assembly-CSharp.csproj|C:\\Users\\inter\\OneDrive\\Plocha\\Courage under Fire\\Courage-under-Fire\\assets\\scripts\\weapon scripts\\weapondata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{520A363F-370B-3A9B-B471-032BC54D316C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\weapon scripts\\weapondata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{520A363F-370B-3A9B-B471-032BC54D316C}|Assembly-CSharp.csproj|c:\\users\\inter\\onedrive\\plocha\\courage under fire\\courage-under-fire\\assets\\scripts\\playermovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{520A363F-370B-3A9B-B471-032BC54D316C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\playermovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{520A363F-370B-3A9B-B471-032BC54D316C}|Assembly-CSharp.csproj|C:\\Users\\inter\\OneDrive\\Plocha\\Courage under Fire\\Courage-under-Fire\\assets\\scripts\\knife.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -21,10 +25,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{520A363F-370B-3A9B-B471-032BC54D316C}|Assembly-CSharp.csproj|C:\\Users\\inter\\OneDrive\\Plocha\\Courage under Fire\\Courage-under-Fire\\assets\\scripts\\weapon scripts\\handgun.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{520A363F-370B-3A9B-B471-032BC54D316C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\weapon scripts\\handgun.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{520A363F-370B-3A9B-B471-032BC54D316C}|Assembly-CSharp.csproj|C:\\Users\\inter\\OneDrive\\Plocha\\Courage under Fire\\Courage-under-Fire\\assets\\scripts\\weapon scripts\\weapondata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{520A363F-370B-3A9B-B471-032BC54D316C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\weapon scripts\\weapondata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{520A363F-370B-3A9B-B471-032BC54D316C}|Assembly-CSharp.csproj|C:\\Users\\inter\\OneDrive\\Plocha\\Courage under Fire\\Courage-under-Fire\\assets\\scripts\\weapon scripts\\weapon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -62,37 +62,37 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Ladder.cs",
-              "DocumentMoniker": "C:\\Users\\inter\\OneDrive\\Plocha\\Courage under Fire\\Courage-under-Fire\\Assets\\Scripts\\Asset Scripts\\Ladder.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Asset Scripts\\Ladder.cs",
-              "ToolTip": "C:\\Users\\inter\\OneDrive\\Plocha\\Courage under Fire\\Courage-under-Fire\\Assets\\Scripts\\Asset Scripts\\Ladder.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Asset Scripts\\Ladder.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAABAAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "FPCam.cs",
+              "DocumentMoniker": "C:\\Users\\inter\\OneDrive\\Plocha\\Courage under Fire\\Courage-under-Fire\\Assets\\Scripts\\FPCam.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\FPCam.cs",
+              "ToolTip": "C:\\Users\\inter\\OneDrive\\Plocha\\Courage under Fire\\Courage-under-Fire\\Assets\\Scripts\\FPCam.cs",
+              "RelativeToolTip": "Assets\\Scripts\\FPCam.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-26T12:10:46.924Z",
+              "WhenOpened": "2024-12-02T07:58:16.886Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "PlayerMovement.cs",
               "DocumentMoniker": "C:\\Users\\inter\\OneDrive\\Plocha\\Courage under Fire\\Courage-under-Fire\\Assets\\Scripts\\PlayerMovement.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\PlayerMovement.cs",
               "ToolTip": "C:\\Users\\inter\\OneDrive\\Plocha\\Courage under Fire\\Courage-under-Fire\\Assets\\Scripts\\PlayerMovement.cs",
               "RelativeToolTip": "Assets\\Scripts\\PlayerMovement.cs",
-              "ViewState": "AgIAABEAAAAAAAAAAAAAwDQAAAAbAAAAAAAAAA==",
+              "ViewState": "AgIAAE4AAAAAAAAAAIA3wJMAAABKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-26T11:47:04.118Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "Knife.cs",
               "DocumentMoniker": "C:\\Users\\inter\\OneDrive\\Plocha\\Courage under Fire\\Courage-under-Fire\\Assets\\Scripts\\Knife.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Knife.cs",
@@ -104,7 +104,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 2,
               "Title": "WeaponData.cs",
               "DocumentMoniker": "C:\\Users\\inter\\OneDrive\\Plocha\\Courage under Fire\\Courage-under-Fire\\Assets\\Scripts\\Weapon Scripts\\WeaponData.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Weapon Scripts\\WeaponData.cs",
@@ -112,11 +112,12 @@
               "RelativeToolTip": "Assets\\Scripts\\Weapon Scripts\\WeaponData.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-18T08:16:15.211Z"
+              "WhenOpened": "2024-11-18T08:16:15.211Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "Handgun.cs",
               "DocumentMoniker": "C:\\Users\\inter\\OneDrive\\Plocha\\Courage under Fire\\Courage-under-Fire\\Assets\\Scripts\\Weapon Scripts\\Handgun.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Weapon Scripts\\Handgun.cs",
@@ -128,15 +129,16 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "LMG.cs",
               "DocumentMoniker": "C:\\Users\\inter\\OneDrive\\Plocha\\Courage under Fire\\Courage-under-Fire\\Assets\\Scripts\\Weapon Scripts\\LMG.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Weapon Scripts\\LMG.cs",
               "ToolTip": "C:\\Users\\inter\\OneDrive\\Plocha\\Courage under Fire\\Courage-under-Fire\\Assets\\Scripts\\Weapon Scripts\\LMG.cs",
               "RelativeToolTip": "Assets\\Scripts\\Weapon Scripts\\LMG.cs",
-              "ViewState": "AgIAAGQAAAAAAAAAAADwvzkAAABEAAAAAAAAAA==",
+              "ViewState": "AgIAABMAAAAAAAAAAAAQwDkAAABEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-06T10:16:45.655Z"
+              "WhenOpened": "2024-11-06T10:16:45.655Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
