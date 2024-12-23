@@ -17,13 +17,13 @@ public class PlayerMovement : MonoBehaviour
     public bool isCrouching;
     public bool isLying;
     protected enum Stance { Standing, Crouching, Lying }
-    protected Stance currentStance = Stance.Standing;
+    protected Stance currentStance;
     public int speedIndicator = 1;
     public float transitionSpeed = 4f;
 
     [Header("Player state")]
     public Vector3 originalScale;
-    public float playerHeight = 2f;
+    public float playerHeight;
     public LayerMask groundLayer;
     public bool isGrounded;
     private bool readyToJump;
@@ -55,10 +55,12 @@ public class PlayerMovement : MonoBehaviour
         currentStance = Stance.Standing;
         speedIndicator = 1;
         moveSpeed = GetMoveSpeed(currentStance);
+        playerHeight = playerModel.transform.localScale.y;
     }
 
     private void Update()
     {
+        Debug.Log($"X coord: {transform.position.x} || Z coord: {transform.position.z}");
         CheckGroundStatus();
         HandleInput();
         UpdateStance();
@@ -68,12 +70,12 @@ public class PlayerMovement : MonoBehaviour
     }
     private void CheckGroundStatus()
     {
-        isGrounded = Physics.CheckSphere(transform.position, playerHeight / 2 + 0.25f, groundLayer);
+        isGrounded = Physics.CheckSphere(transform.position, playerHeight + 0.25f, groundLayer);
         rb.drag = isGrounded ? groundDrag : 0;
     }
     public void CheckSlope()
     {
-        onSlope = Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, playerHeight / 2 + 0.25f) 
+        onSlope = Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, playerHeight + 0.25f) 
                && Vector3.Angle(hit.normal, Vector3.up) <= 45f && Vector3.Angle(hit.normal, Vector3.up) > 0;
     }
     private void UpdateStance()
@@ -101,12 +103,20 @@ public class PlayerMovement : MonoBehaviour
     }
     private void UpdateLyingState()
     {
-        Debug.Log(currentStance);
-        transform.localScale = originalScale;
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(90, 0, 0), transitionSpeed * Time.deltaTime);
-        playerModel.transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(90, 0, 0), transitionSpeed * Time.deltaTime);
-        isCrouching = false;
-        isLying = true;
+        if (playerModel != null)
+        {
+            Debug.Log(currentStance);
+            originalScale = transform.localScale;
+            Debug.Log(originalScale);
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(90, 0, 0), transitionSpeed * Time.deltaTime);
+            playerModel.transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(90, 0, 0), transitionSpeed * Time.deltaTime);
+            if (playerModel.transform.rotation.x > 0)
+                Debug.Log("Player model rotated");
+            isCrouching = false;
+            isLying = true;
+        }
+        else
+            Debug.Log("PlayerModel is null");
     }
     private void UpdateCrouchState()
     {
@@ -115,7 +125,6 @@ public class PlayerMovement : MonoBehaviour
         isCrouching = true;
         isLying = false;
     }
-
     private void HandleInput()
     {
         horInput = Input.GetAxisRaw("Horizontal");
@@ -152,8 +161,8 @@ public class PlayerMovement : MonoBehaviour
                 rb.AddForce(moveSpeed * moveDirection.normalized, ForceMode.Force);
             else if (onSlope)
             {
-                rb.AddForce(5f * moveSpeed * moveDirection.normalized, ForceMode.Force);
-                //rb.drag *= 2;
+                rb.AddForce(1.5f * moveSpeed * moveDirection.normalized, ForceMode.Force);
+                rb.drag *= 2;
             }
             else if (!isGrounded && !onSlope)
                 rb.AddForce(5f * airMultiplier * moveSpeed * moveDirection.normalized, ForceMode.Force);

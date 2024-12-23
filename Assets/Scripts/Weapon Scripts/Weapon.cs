@@ -15,6 +15,7 @@ public abstract class Weapon : MonoBehaviour
     public float fireRate;
     public float bulletSpeed;
     public GameObject pickupPromptUI;
+    public float reloadSpeed;
     protected enum WeaponType { Automatic, SemiAutomatic, SingleShot, Melee}
 
     private void Start()

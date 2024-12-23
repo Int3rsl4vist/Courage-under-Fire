@@ -75,8 +75,9 @@ public class LMG : Weapon
     private IEnumerator ReloadCoroutine()
     {
         magazineCount--;
-        ammo = magazineSize;
         yield return new WaitForSeconds(1f);
+        ammo = magazineSize;
+        
     }
     public override void Drop()
     {
@@ -85,7 +86,8 @@ public class LMG : Weapon
         GameObject droppedWeapon = Instantiate(gameObject, transform.position, transform.rotation);
 
         droppedWeapon.SetActive(true);
-
+        droppedWeapon.AddComponent<Rigidbody>();
+        droppedWeapon.AddComponent<Collider>().isTrigger = true;
 
         LMG weaponScript = droppedWeapon.GetComponent<LMG>();
 
