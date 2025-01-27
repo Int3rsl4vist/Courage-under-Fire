@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Weapon
   - Enemy
+  - Door
+  - AmmoCrate
+  - Ladder
   layers:
   - Default
   - TransparentFX

@@ -8,6 +8,7 @@ public class LMG : Weapon
 {
     public WeaponData weaponData;
     private bool isShooting = false;
+    private bool readyToShoot = true;
 
     private void Start()
     {
@@ -47,7 +48,8 @@ public class LMG : Weapon
             return;
         /*if (!isEquipped)
             return;*/
-        StartCoroutine(AttackCoroutine());
+        if(readyToShoot)
+            StartCoroutine(AttackCoroutine());
     }
     private IEnumerator AttackCoroutine()
     {
@@ -74,10 +76,11 @@ public class LMG : Weapon
     }
     private IEnumerator ReloadCoroutine()
     {
+        readyToShoot = false;
         magazineCount--;
         yield return new WaitForSeconds(1f);
         ammo = magazineSize;
-        
+        readyToShoot = true;
     }
     public override void Drop()
     {

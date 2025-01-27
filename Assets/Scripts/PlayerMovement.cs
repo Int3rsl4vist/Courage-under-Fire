@@ -16,8 +16,8 @@ public class PlayerMovement : MonoBehaviour
     [Header("Stance")]
     public bool isCrouching;
     public bool isLying;
-    protected enum Stance { Standing, Crouching, Lying }
-    protected Stance currentStance;
+    public enum Stance { Standing, Crouching, Lying, Climbing }
+    public Stance currentStance;
     public int speedIndicator = 1;
     public float transitionSpeed = 4f;
 
@@ -44,7 +44,8 @@ public class PlayerMovement : MonoBehaviour
     {
         { Stance.Standing, new float[] { 2.5f, 5f, 7.5f, 9f } },
         { Stance.Crouching, new float[] { 2f, 4f, 6f, 7f } },
-        { Stance.Lying, new float[] { 1f, 1.5f, 2f, 2.5f } }
+        { Stance.Lying, new float[] { 1f, 1.5f, 2f, 2.5f } },
+        { Stance.Climbing, new float[] { 1.5f, 2.75f, 4f, 4.75f} }
     };
 
     private void Start()
@@ -88,6 +89,9 @@ public class PlayerMovement : MonoBehaviour
             case Stance.Lying:
                 UpdateLyingState();
                 break;
+            case Stance.Climbing:
+                UpdateClimbingState();
+                break;
             default:
                 UpdateStandingState();
                 break;
@@ -123,6 +127,13 @@ public class PlayerMovement : MonoBehaviour
         transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(originalScale.x, originalScale.y * 0.5f, originalScale.z), transitionSpeed * Time.deltaTime);
         transform.rotation = Quaternion.identity;
         isCrouching = true;
+        isLying = false;
+    }
+    private void UpdateClimbingState()
+    {
+        transform.localScale = originalScale;
+        transform.rotation = Quaternion.identity;
+        isCrouching = false;
         isLying = false;
     }
     private void HandleInput()
