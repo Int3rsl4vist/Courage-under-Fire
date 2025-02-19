@@ -84,6 +84,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_PhoneNumberValidator.cs" />
     <Compile Include="Assets\Scripts\Weapon Scripts\HMG.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexJitter.cs" />
+    <Compile Include="Assets\Scripts\DataHandler\DataPersistanceManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_DigitValidator.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_FrameRateCounter.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextConsoleSimulator.cs" />
@@ -108,10 +109,13 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
     <Compile Include="Assets\Scripts\Weapon Scripts\Weapon.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
+    <Compile Include="Assets\Scripts\DataHandler\IDataPersistance.cs" />
+    <Compile Include="Assets\Scripts\DataHandler\FileDataHandler.cs" />
     <Compile Include="Assets\Scripts\Weapon Scripts\Rifle.cs" />
     <Compile Include="Assets\Scripts\Scene Scripts\SaveLoadManager.cs" />
     <Compile Include="Assets\Scripts\Weapon Scripts\Handgun.cs" />
     <Compile Include="Assets\Scripts\MoveFPCam.cs" />
+    <Compile Include="Assets\Scripts\DataHandler\Data\GameData.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextInfoDebugTool.cs" />
     <Compile Include="Assets\Scripts\HUD.cs" />
