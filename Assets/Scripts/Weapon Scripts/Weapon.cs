@@ -18,12 +18,14 @@ public abstract class Weapon : MonoBehaviour, IDataPersistance
     public float reloadSpeed;
     public bool isShooting = false;
     public bool readyToShoot = true;
+    private AudioSource shotSound;
     protected enum WeaponType { Automatic, SemiAutomatic, SingleShot, Melee}
 
     private void Start()
     {
         fireRate /= 60f;
         ammo = magazineSize;
+        shotSound = GetComponent<AudioSource>();
     }
     private void Update()
     {
@@ -56,11 +58,14 @@ public abstract class Weapon : MonoBehaviour, IDataPersistance
     {
         isShooting = true;
         var bullet = Instantiate(bulletPrefab, bulletSpawner.position, bulletSpawner.rotation);
-        if (bullet.TryGetComponent<Rigidbody>(out var bulletRb))
+        Destroy(bullet, .025f);
+        RaycastHit hit;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if(Physics.Raycast(ray, out hit))
         {
-            bulletRb.AddForce(bulletSpawner.forward * (bulletSpeed / 2), ForceMode.Impulse);
+            Transform hitObject = hit.transform;
+            Debug.Log($"Ray hit: {hit.transform.name}");
         }
-        Destroy(bullet, 2.5f);
         ammo--;
         Debug.Log($"LMG attack");
         yield return new WaitForSeconds(1 / fireRate);
@@ -90,6 +95,7 @@ public abstract class Weapon : MonoBehaviour, IDataPersistance
         GameObject droppedWeapon = Instantiate(gameObject, transform.position, transform.rotation);
 
         droppedWeapon.SetActive(true);
+        droppedWeapon.layer = 7;
         droppedWeapon.AddComponent<Rigidbody>();
         droppedWeapon.GetComponent<BoxCollider>().enabled = true;
 
