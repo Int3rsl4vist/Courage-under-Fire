@@ -66,8 +66,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.26477832, y: 4.1, z: 0.5}
-  m_Center: {x: 0.11988917, y: 0, z: 0}
+  m_Size: {x: 0.26477832, y: 4.0500274, z: 0.5}
+  m_Center: {x: 0.11988917, y: 0.025, z: 0}
 --- !u!114 &2612613366004148314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1151,6 +1151,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9196247005361065282}
+  - component: {fileID: 99188821802802928}
+  - component: {fileID: 7280377737477843043}
   m_Layer: 0
   m_Name: Short Ladder (1)
   m_TagString: Ladder
@@ -1182,6 +1184,39 @@ Transform:
   - {fileID: 880983829843684326}
   m_Father: {fileID: 6874595142595650655}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &99188821802802928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1136050752585849402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 961fc1886b7526f4c8e43fc46781f95e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &7280377737477843043
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1136050752585849402}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.26477826, y: 2.051366, z: 0.5}
+  m_Center: {x: 0.1198892, y: 0.025, z: 0}
 --- !u!1 &1165935823951710459
 GameObject:
   m_ObjectHideFlags: 0
@@ -2759,8 +2794,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3948082830469762976}
   - {fileID: 340120069857420765}
@@ -3318,8 +3353,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7454458960721056647}
   - {fileID: 6640186338296285191}
@@ -4378,7 +4413,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 7.9855347}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7248025740453519595}
@@ -4837,8 +4872,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7911318905838693904}
   - {fileID: 6875932180801165266}
@@ -7295,6 +7330,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4608048431220031353}
+  - component: {fileID: 538874088171414055}
+  - component: {fileID: 1620974850069767221}
   m_Layer: 0
   m_Name: Long Ladder (1)
   m_TagString: Untagged
@@ -7330,6 +7367,39 @@ Transform:
   - {fileID: 8534356118691475743}
   m_Father: {fileID: 6874595142595650655}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!114 &538874088171414055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7403470208248164550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 961fc1886b7526f4c8e43fc46781f95e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &1620974850069767221
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7403470208248164550}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.26477826, y: 4.048603, z: 0.5}
+  m_Center: {x: 0.1198892, y: 0.025, z: 0}
 --- !u!1 &7442293490143600033
 GameObject:
   m_ObjectHideFlags: 0
@@ -8017,8 +8087,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8880599674578194878}
   - {fileID: 9196247005361065282}
@@ -9555,6 +9625,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8880599674578194878}
+  - component: {fileID: 4944755181876148738}
+  - component: {fileID: 7818386909219436045}
   m_Layer: 0
   m_Name: Short Ladder
   m_TagString: Ladder
@@ -9586,6 +9658,39 @@ Transform:
   - {fileID: 7197897714894300588}
   m_Father: {fileID: 6874595142595650655}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4944755181876148738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8966303723425058766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 961fc1886b7526f4c8e43fc46781f95e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &7818386909219436045
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8966303723425058766}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.26477826, y: 2.0497432, z: 0.5}
+  m_Center: {x: 0.1198892, y: 0.025, z: 0}
 --- !u!1 &9026532533654084293
 GameObject:
   m_ObjectHideFlags: 0

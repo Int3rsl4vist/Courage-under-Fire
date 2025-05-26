@@ -9,6 +9,11 @@ TagManager:
   - Door
   - AmmoCrate
   - Ladder
+  - MAP_Roads
+  - MAP_Grass
+  - MAP_Dirt
+  - MAP_Transparent
+  - MAP_Stone
   layers:
   - Default
   - TransparentFX

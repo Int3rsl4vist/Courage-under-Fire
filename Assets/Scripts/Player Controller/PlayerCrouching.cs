@@ -31,6 +31,7 @@ public class PlayerCrouching : MonoBehaviour
     {
         origCamPos = player.camTransform.localPosition;
         standingHeight = curHeight = player.Height;
+        crouchHeight = player.Height / 3;
     }
     void OnEnable() => player.OnBeforeMove += OnBeforeMove;
     void OnDisable() => player.OnBeforeMove -= OnBeforeMove;
