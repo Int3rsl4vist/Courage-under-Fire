@@ -14,6 +14,8 @@ TagManager:
   - MAP_Dirt
   - MAP_Transparent
   - MAP_Stone
+  - MAP_Trigger
+  - MAP_NoCol
   layers:
   - Default
   - TransparentFX

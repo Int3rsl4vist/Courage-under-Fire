@@ -4,47 +4,59 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    public float interactionDistance;
     public GameObject interactionText;
-    public string doorOpenAnimationName, doorCloseAnimationName;
-    bool unlocked = true;
+    public float interactionDistance;
+    private KeyCode interKey;
+    private Animator anim;
+    public Transform cam;
 
-    private void Update()
+    void Start()
     {
-        Ray ray = new(transform.position, transform.forward);
-        RaycastHit hit;
+        interKey = KeyCode.F;
+        //base.Start(); // Call the base Start method
+        anim = GetComponent<Animator>(); // Get the Animator component
+        Debug.Log("Starting");
+    }
 
-        if(Physics.Raycast(ray, out hit, interactionDistance))
+    void Update()
+    {
+        Debug.Log($"Text: {interactionText} | Distance: {interactionDistance}");
+        Ray ray = new(cam.transform.position, cam.transform.forward);
+        if (Physics.Raycast(ray, out RaycastHit hit, interactionDistance))
         {
-            if (hit.collider.gameObject.tag == "Door")
+            if (hit.collider.gameObject.CompareTag("Door"))
             {
-                if (unlocked)
+                interactionText.SetActive(true);
+
+                if (Input.GetKeyDown(interKey))
                 {
-                    Debug.Log("Ray hit");
-                    GameObject doorMover = hit.collider.transform.parent.parent.gameObject;
-                    Animator doorAnimator = doorMover.GetComponent<Animator>();
-                    interactionText.SetActive(true);
-                    if (Input.GetKeyDown(KeyCode.F))
-                    {
-                        Debug.Log("Interaction key pressed");
-                        if (doorAnimator.GetCurrentAnimatorStateInfo(0).IsName(doorOpenAnimationName))
-                        {
-                            Debug.Log("Opening door");
-                            doorAnimator.ResetTrigger("Open");
-                            doorAnimator.SetTrigger("Close");
-                        }
-                        if (doorAnimator.GetCurrentAnimatorStateInfo(0).IsName(doorCloseAnimationName))
-                        {
-                            Debug.Log("Closing door");
-                            doorAnimator.ResetTrigger("Close");
-                            doorAnimator.SetTrigger("Open");
-                        }
-                    }
+                    HandleAnimation();
                 }
-                unlocked = false;
             }
             else
+            {
                 interactionText.SetActive(false);
+            }
+        }
+        else
+        {
+            interactionText.SetActive(false);
+        }
+    }
+
+    private void HandleAnimation()
+    {
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("DoorOpen"))
+        {
+            anim.ResetTrigger("Open");
+            anim.SetTrigger("Close");
+            Debug.Log("Door closing!");
+        }
+        else if (anim.GetCurrentAnimatorStateInfo(0).IsName("DoorClose"))
+        {
+            anim.ResetTrigger("Close");
+            anim.SetTrigger("Open");
+            Debug.Log("Door opening!");
         }
     }
 }

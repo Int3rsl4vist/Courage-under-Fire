@@ -26,6 +26,7 @@ public class TextureManager : MonoBehaviour
         }
 
         ApplyMaterials();
+        ApplyColliders();
     }
 
     void ApplyMaterials()
@@ -62,5 +63,18 @@ public class TextureManager : MonoBehaviour
         }
 
         Debug.Log("Materials assigned based on tags.");
+    }
+    void ApplyColliders()
+    {
+        GameObject[] allObjects = FindObjectsOfType<GameObject>();
+        foreach (GameObject obj in allObjects)
+        {
+            if (obj.CompareTag("MAP_Trigger"))
+                { continue; }
+            if (obj.CompareTag("MAP_NoCol"))
+                { continue; }
+            if (!obj.GetComponent<Collider>())
+                obj.AddComponent<MeshCollider>();
+        }
     }
 }

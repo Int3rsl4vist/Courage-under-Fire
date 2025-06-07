@@ -11,13 +11,13 @@ public class PlayerInteraction : MonoBehaviour
     public float interactionDistance;
     public GameObject interactionText;
 
-    public List<string> animationNames = new() { "DoorOpen", "DoorClose"};
+    //public List<string> animationNames = new() { "DoorOpen", "DoorClose", "CrateOpen", "CrateClose" };
 
-    protected KeyCode interKey;
+    protected KeyCode interactionKey;
 
     private void Start()
     {
-        interKey = KeyCode.F;
+        interactionKey = KeyCode.F;
     }
 
     private void Update()
@@ -25,19 +25,20 @@ public class PlayerInteraction : MonoBehaviour
         Ray ray = new(transform.position, transform.forward);
         if (Physics.Raycast(ray, out RaycastHit hit, interactionDistance))
         {
+            interactionText.SetActive(true);
             if (hit.collider.gameObject.CompareTag("Door"))
             {
                 GameObject doorMover = hit.collider.transform.parent.parent.gameObject;
                 Animator doorAnimator = doorMover.GetComponent<Animator>();
 
-                interactionText.SetActive(true);
 
-                if (Input.GetKeyDown(interKey))
+                if (Input.GetKeyDown(interactionKey))
                 {
                     if (doorAnimator.GetCurrentAnimatorStateInfo(0).IsName("DoorOpen"))
                     {
                         doorAnimator.ResetTrigger("Open");
                         doorAnimator.SetTrigger("Close");
+                        Debug.Log($"Door open!");
                     }
                     else if (doorAnimator.GetCurrentAnimatorStateInfo(0).IsName("DoorClose"))
                     {
@@ -59,8 +60,7 @@ public class PlayerInteraction : MonoBehaviour
             {
                 GameObject mover = hit.collider.transform.parent.gameObject;
                 Animator anim = mover.GetComponent<Animator>();
-                interactionText.SetActive(true);
-                if (Input.GetKeyDown(interKey))
+                if (Input.GetKeyDown(interactionKey))
                 {
                     if (anim.GetCurrentAnimatorStateInfo(0).IsName("CrateOpen"))
                     {
@@ -74,10 +74,10 @@ public class PlayerInteraction : MonoBehaviour
                     }
 
                     // Debug all animations in the dictionary
-                    foreach (string animation in animationNames)
+                    /*foreach (string animation in animationNames)
                     {
                         Debug.Log($"Animation: {animation}");
-                    }
+                    }*/
                 }
             }
             else
