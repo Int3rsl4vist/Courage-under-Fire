@@ -73,7 +73,7 @@ public class TextureManager : MonoBehaviour
                 { continue; }
             if (obj.CompareTag("MAP_NoCol"))
                 { continue; }
-            if (!obj.GetComponent<Collider>())
+            if (!obj.GetComponent<MeshCollider>())
                 obj.AddComponent<MeshCollider>();
         }
     }

@@ -1,9 +1,13 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\djcze\\Documents\\GitHub\\Courage-under-Fire\\",
+  "WorkspaceRootPath": "C:\\Users\\inter\\OneDrive\\Plocha\\Courage under Fire\\Courage-under-Fire\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{520A363F-370B-3A9B-B471-032BC54D316C}|Assembly-CSharp.csproj|c:\\users\\djcze\\documents\\github\\courage-under-fire\\assets\\scripts\\scene scripts\\texturemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{520A363F-370B-3A9B-B471-032BC54D316C}|Assembly-CSharp.csproj|c:\\users\\inter\\onedrive\\plocha\\courage under fire\\courage-under-fire\\assets\\scripts\\mainmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{520A363F-370B-3A9B-B471-032BC54D316C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\mainmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{520A363F-370B-3A9B-B471-032BC54D316C}|Assembly-CSharp.csproj|c:\\users\\inter\\onedrive\\plocha\\courage under fire\\courage-under-fire\\assets\\scripts\\scene scripts\\texturemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{520A363F-370B-3A9B-B471-032BC54D316C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\scene scripts\\texturemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -19,12 +23,25 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "MainMenu.cs",
+              "DocumentMoniker": "C:\\Users\\inter\\OneDrive\\Plocha\\Courage under Fire\\Courage-under-Fire\\Assets\\Scripts\\MainMenu.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\MainMenu.cs",
+              "ToolTip": "C:\\Users\\inter\\OneDrive\\Plocha\\Courage under Fire\\Courage-under-Fire\\Assets\\Scripts\\MainMenu.cs",
+              "RelativeToolTip": "Assets\\Scripts\\MainMenu.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-16T09:50:48.668Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "TextureManager.cs",
-              "DocumentMoniker": "C:\\Users\\djcze\\Documents\\GitHub\\Courage-under-Fire\\Assets\\Scripts\\Scene Scripts\\TextureManager.cs",
+              "DocumentMoniker": "C:\\Users\\inter\\OneDrive\\Plocha\\Courage under Fire\\Courage-under-Fire\\Assets\\Scripts\\Scene Scripts\\TextureManager.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Scene Scripts\\TextureManager.cs",
-              "ToolTip": "C:\\Users\\djcze\\Documents\\GitHub\\Courage-under-Fire\\Assets\\Scripts\\Scene Scripts\\TextureManager.cs",
+              "ToolTip": "C:\\Users\\inter\\OneDrive\\Plocha\\Courage under Fire\\Courage-under-Fire\\Assets\\Scripts\\Scene Scripts\\TextureManager.cs",
               "RelativeToolTip": "Assets\\Scripts\\Scene Scripts\\TextureManager.cs",
-              "ViewState": "AgIAACAAAAAAAAAAAAAwwBwAAAAZAAAAAAAAAA==",
+              "ViewState": "AgIAADUAAAAAAAAAAAAwwEwAAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-12T17:30:33.077Z",
               "EditorCaption": ""
