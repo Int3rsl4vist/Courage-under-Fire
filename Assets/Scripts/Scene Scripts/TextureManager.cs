@@ -15,9 +15,9 @@ public class TextureManager : MonoBehaviour
 
     private Dictionary<string, Material> materialDict;
 
-    void Awake()
+    void Start()
     {
-        // Convert list to dictionary for faster lookup
+        Debug.Log("TextureManager is alive");
         materialDict = new Dictionary<string, Material>();
         foreach (var pair in materialsByTag)
         {
@@ -69,12 +69,17 @@ public class TextureManager : MonoBehaviour
         GameObject[] allObjects = FindObjectsOfType<GameObject>();
         foreach (GameObject obj in allObjects)
         {
-            if (obj.CompareTag("MAP_Trigger"))
-                { continue; }
-            if (obj.CompareTag("MAP_NoCol"))
-                { continue; }
-            if (!obj.GetComponent<MeshCollider>())
-                obj.AddComponent<MeshCollider>();
+            if (!obj.activeInHierarchy) continue;
+
+            if (obj.CompareTag("MAP_Trigger") || obj.CompareTag("MAP_NoCol"))
+            {
+                Collider col = obj.GetComponent<Collider>();
+                if (col != null)
+                {
+                    Destroy(col);
+                    Debug.Log($" Removed collider from: {obj.name}");
+                }
+            }
         }
     }
 }

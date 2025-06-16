@@ -25,7 +25,10 @@ public class PlayerInteraction : MonoBehaviour
         Ray ray = new(transform.position, transform.forward);
         if (Physics.Raycast(ray, out RaycastHit hit, interactionDistance))
         {
-            interactionText.SetActive(true);
+            if(interactionText != null)
+            {
+                interactionText.SetActive(true);
+            }
             if (hit.collider.gameObject.CompareTag("Door"))
             {
                 GameObject doorMover = hit.collider.transform.parent.parent.gameObject;

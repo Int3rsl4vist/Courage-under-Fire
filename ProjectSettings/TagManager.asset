@@ -16,6 +16,7 @@ TagManager:
   - MAP_Stone
   - MAP_Trigger
   - MAP_NoCol
+  - Destroyable
   layers:
   - Default
   - TransparentFX

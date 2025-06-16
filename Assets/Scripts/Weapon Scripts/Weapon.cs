@@ -18,14 +18,17 @@ public abstract class Weapon : MonoBehaviour, IDataPersistance
     public float reloadSpeed;
     public bool isShooting = false;
     public bool readyToShoot = true;
-    private AudioSource shotSound;
+    public AudioSource audio;
+    public AudioClip equipClip;
+    public AudioClip shotClip;
+    public AudioClip reloadClip;
     protected enum WeaponType { Automatic, SemiAutomatic, SingleShot, Melee}
 
     private void Start()
     {
         fireRate /= 60f;
         ammo = magazineSize;
-        shotSound = GetComponent<AudioSource>();
+        audio = GetComponent<AudioSource>();
     }
     private void Update()
     {
@@ -57,14 +60,15 @@ public abstract class Weapon : MonoBehaviour, IDataPersistance
     public IEnumerator AttackCoroutine()
     {
         isShooting = true;
-        var bullet = Instantiate(bulletPrefab, bulletSpawner.position, bulletSpawner.rotation);
-        Destroy(bullet, .025f);
+        audio.PlayOneShot(shotClip);
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if(Physics.Raycast(ray, out hit))
         {
             Transform hitObject = hit.transform;
             Debug.Log($"Ray hit: {hit.transform.name}");
+            if (hitObject.CompareTag("Destroyable"))
+                Destroy(hitObject.gameObject);
         }
         ammo--;
         Debug.Log($"LMG attack");
@@ -83,6 +87,7 @@ public abstract class Weapon : MonoBehaviour, IDataPersistance
     public IEnumerator ReloadCoroutine()
     {
         readyToShoot = false;
+        audio.PlayOneShot(reloadClip);
         magazineCount--;
         yield return new WaitForSeconds(1f);
         ammo = magazineSize;
