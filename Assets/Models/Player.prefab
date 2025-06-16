@@ -272,9 +272,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactionDistance: 5
   interactionText: {fileID: 0}
-  animationNames:
-  - DoorOpen
-  - DoorClose
 --- !u!114 &5070616282773652367
 MonoBehaviour:
   m_ObjectHideFlags: 0
