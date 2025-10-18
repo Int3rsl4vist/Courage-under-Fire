@@ -71,7 +71,7 @@ public abstract class Weapon : MonoBehaviour, IDataPersistance
                 Destroy(hitObject.gameObject);
         }
         ammo--;
-        Debug.Log($"LMG attack");
+        //Debug.Log($"Shooting");
         yield return new WaitForSeconds(1 / fireRate);
         isShooting = false;
     }

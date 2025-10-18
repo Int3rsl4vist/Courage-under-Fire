@@ -12,6 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Mission0.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
-    path: Assets/Scenes/Mission_Training.unity
+    path: Assets/Scenes/Mis_Tut.unity
     guid: 4faeec4423a3db047a3a5836ee189969
   m_configObjects: {}

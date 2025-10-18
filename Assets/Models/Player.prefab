@@ -308,7 +308,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.1
   far clip plane: 1000
   field of view: 75
   orthographic: 0
@@ -395,6 +395,7 @@ GameObject:
   - component: {fileID: 1739036650315523281}
   - component: {fileID: 3274542617047569766}
   - component: {fileID: 4049696057042175328}
+  - component: {fileID: 3156194824510675697}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -573,6 +574,25 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &3156194824510675697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4892016332910561601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2a487461bc9d7147babbe9d13695aea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  materialsByTag:
+  - tag: MAP_Transparent
+    material: {fileID: 2100000, guid: 0f71b2351ff2f9f449cca22fdc43ceec, type: 2}
+  - tag: MAP_Trigger
+    material: {fileID: 2100000, guid: 0f71b2351ff2f9f449cca22fdc43ceec, type: 2}
+  - tag: MAP_TranspNoCol
+    material: {fileID: 2100000, guid: 0f71b2351ff2f9f449cca22fdc43ceec, type: 2}
 --- !u!1 &6263911274815572985
 GameObject:
   m_ObjectHideFlags: 0
@@ -891,6 +911,10 @@ MonoBehaviour:
   reloadSpeed: 0
   isShooting: 0
   readyToShoot: 1
+  audio: {fileID: 0}
+  equipClip: {fileID: 0}
+  shotClip: {fileID: 0}
+  reloadClip: {fileID: 0}
   weaponData:
     ammo: 0
     magazineSize: 0

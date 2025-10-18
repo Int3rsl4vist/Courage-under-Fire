@@ -1,14 +1,38 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\inter\\OneDrive\\Plocha\\Courage under Fire\\Courage-under-Fire\\",
+  "WorkspaceRootPath": "C:\\Users\\djcze\\Documents\\GitHub\\Courage-under-Fire\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{520A363F-370B-3A9B-B471-032BC54D316C}|Assembly-CSharp.csproj|c:\\users\\inter\\onedrive\\plocha\\courage under fire\\courage-under-fire\\assets\\scripts\\mainmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{520A363F-370B-3A9B-B471-032BC54D316C}|Assembly-CSharp.csproj|c:\\users\\djcze\\documents\\github\\courage-under-fire\\assets\\scripts\\scene scripts\\particles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{520A363F-370B-3A9B-B471-032BC54D316C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\scene scripts\\particles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{520A363F-370B-3A9B-B471-032BC54D316C}|Assembly-CSharp.csproj|C:\\Users\\djcze\\Documents\\GitHub\\Courage-under-Fire\\assets\\scripts\\scene scripts\\texturemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{520A363F-370B-3A9B-B471-032BC54D316C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\scene scripts\\texturemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{53157E2C-148A-F62F-A653-C4657F3CD09A}|PlayerController.csproj|C:\\Users\\djcze\\Documents\\GitHub\\Courage-under-Fire\\assets\\scripts\\player controller\\playercrouching.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{53157E2C-148A-F62F-A653-C4657F3CD09A}|PlayerController.csproj|solutionrelative:assets\\scripts\\player controller\\playercrouching.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{520A363F-370B-3A9B-B471-032BC54D316C}|Assembly-CSharp.csproj|C:\\Users\\djcze\\Documents\\GitHub\\Courage-under-Fire\\assets\\scripts\\mainmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{520A363F-370B-3A9B-B471-032BC54D316C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\mainmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{520A363F-370B-3A9B-B471-032BC54D316C}|Assembly-CSharp.csproj|c:\\users\\inter\\onedrive\\plocha\\courage under fire\\courage-under-fire\\assets\\scripts\\scene scripts\\texturemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{520A363F-370B-3A9B-B471-032BC54D316C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\scene scripts\\texturemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{520A363F-370B-3A9B-B471-032BC54D316C}|Assembly-CSharp.csproj|c:\\users\\djcze\\documents\\github\\courage-under-fire\\assets\\scripts\\asset scripts\\mis0\\training_tank.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{520A363F-370B-3A9B-B471-032BC54D316C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\asset scripts\\mis0\\training_tank.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{520A363F-370B-3A9B-B471-032BC54D316C}|Assembly-CSharp.csproj|C:\\Users\\djcze\\Documents\\GitHub\\Courage-under-Fire\\assets\\scripts\\asset scripts\\ladder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{520A363F-370B-3A9B-B471-032BC54D316C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\asset scripts\\ladder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{520A363F-370B-3A9B-B471-032BC54D316C}|Assembly-CSharp.csproj|C:\\Users\\djcze\\Documents\\GitHub\\Courage-under-Fire\\assets\\scripts\\weapon scripts\\weapon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{520A363F-370B-3A9B-B471-032BC54D316C}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\weapon scripts\\weapon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{53157E2C-148A-F62F-A653-C4657F3CD09A}|PlayerController.csproj|C:\\Users\\djcze\\Documents\\GitHub\\Courage-under-Fire\\assets\\scripts\\player controller\\playerinteraction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{53157E2C-148A-F62F-A653-C4657F3CD09A}|PlayerController.csproj|solutionrelative:assets\\scripts\\player controller\\playerinteraction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -23,10 +47,88 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "Particles.cs",
+              "DocumentMoniker": "C:\\Users\\djcze\\Documents\\GitHub\\Courage-under-Fire\\Assets\\Scripts\\Scene Scripts\\Particles.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Scene Scripts\\Particles.cs",
+              "ToolTip": "C:\\Users\\djcze\\Documents\\GitHub\\Courage-under-Fire\\Assets\\Scripts\\Scene Scripts\\Particles.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Scene Scripts\\Particles.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-05T18:01:16.362Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Training_Tank.cs",
+              "DocumentMoniker": "C:\\Users\\djcze\\Documents\\GitHub\\Courage-under-Fire\\Assets\\Scripts\\Asset Scripts\\Mis0\\Training_Tank.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Asset Scripts\\Mis0\\Training_Tank.cs",
+              "ToolTip": "C:\\Users\\djcze\\Documents\\GitHub\\Courage-under-Fire\\Assets\\Scripts\\Asset Scripts\\Mis0\\Training_Tank.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Asset Scripts\\Mis0\\Training_Tank.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-18T19:03:44.12Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "PlayerInteraction.cs",
+              "DocumentMoniker": "C:\\Users\\djcze\\Documents\\GitHub\\Courage-under-Fire\\Assets\\Scripts\\Player Controller\\PlayerInteraction.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Player Controller\\PlayerInteraction.cs",
+              "ToolTip": "C:\\Users\\djcze\\Documents\\GitHub\\Courage-under-Fire\\Assets\\Scripts\\Player Controller\\PlayerInteraction.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Player Controller\\PlayerInteraction.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADMAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-16T19:14:16.617Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Weapon.cs",
+              "DocumentMoniker": "C:\\Users\\djcze\\Documents\\GitHub\\Courage-under-Fire\\Assets\\Scripts\\Weapon Scripts\\Weapon.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Weapon Scripts\\Weapon.cs",
+              "ToolTip": "C:\\Users\\djcze\\Documents\\GitHub\\Courage-under-Fire\\Assets\\Scripts\\Weapon Scripts\\Weapon.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Weapon Scripts\\Weapon.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-16T18:02:13.881Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Ladder.cs",
+              "DocumentMoniker": "C:\\Users\\djcze\\Documents\\GitHub\\Courage-under-Fire\\Assets\\Scripts\\Asset Scripts\\Ladder.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Asset Scripts\\Ladder.cs",
+              "ToolTip": "C:\\Users\\djcze\\Documents\\GitHub\\Courage-under-Fire\\Assets\\Scripts\\Asset Scripts\\Ladder.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Asset Scripts\\Ladder.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-16T15:17:00.76Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "PlayerCrouching.cs",
+              "DocumentMoniker": "C:\\Users\\djcze\\Documents\\GitHub\\Courage-under-Fire\\Assets\\Scripts\\Player Controller\\PlayerCrouching.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Player Controller\\PlayerCrouching.cs",
+              "ToolTip": "C:\\Users\\djcze\\Documents\\GitHub\\Courage-under-Fire\\Assets\\Scripts\\Player Controller\\PlayerCrouching.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Player Controller\\PlayerCrouching.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-16T15:16:41.304Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "MainMenu.cs",
-              "DocumentMoniker": "C:\\Users\\inter\\OneDrive\\Plocha\\Courage under Fire\\Courage-under-Fire\\Assets\\Scripts\\MainMenu.cs",
+              "DocumentMoniker": "C:\\Users\\djcze\\Documents\\GitHub\\Courage-under-Fire\\Assets\\Scripts\\MainMenu.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\MainMenu.cs",
-              "ToolTip": "C:\\Users\\inter\\OneDrive\\Plocha\\Courage under Fire\\Courage-under-Fire\\Assets\\Scripts\\MainMenu.cs",
+              "ToolTip": "C:\\Users\\djcze\\Documents\\GitHub\\Courage-under-Fire\\Assets\\Scripts\\MainMenu.cs",
               "RelativeToolTip": "Assets\\Scripts\\MainMenu.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -37,11 +139,11 @@
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "TextureManager.cs",
-              "DocumentMoniker": "C:\\Users\\inter\\OneDrive\\Plocha\\Courage under Fire\\Courage-under-Fire\\Assets\\Scripts\\Scene Scripts\\TextureManager.cs",
+              "DocumentMoniker": "C:\\Users\\djcze\\Documents\\GitHub\\Courage-under-Fire\\Assets\\Scripts\\Scene Scripts\\TextureManager.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Scene Scripts\\TextureManager.cs",
-              "ToolTip": "C:\\Users\\inter\\OneDrive\\Plocha\\Courage under Fire\\Courage-under-Fire\\Assets\\Scripts\\Scene Scripts\\TextureManager.cs",
+              "ToolTip": "C:\\Users\\djcze\\Documents\\GitHub\\Courage-under-Fire\\Assets\\Scripts\\Scene Scripts\\TextureManager.cs",
               "RelativeToolTip": "Assets\\Scripts\\Scene Scripts\\TextureManager.cs",
-              "ViewState": "AgIAADUAAAAAAAAAAAAwwEwAAAAxAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAE8AAABCAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-12T17:30:33.077Z",
               "EditorCaption": ""

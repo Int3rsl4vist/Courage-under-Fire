@@ -25,8 +25,8 @@ public class TextureManager : MonoBehaviour
                 materialDict[pair.tag] = pair.material;
         }
 
-        ApplyMaterials();
         ApplyColliders();
+        ApplyMaterials();
     }
 
     void ApplyMaterials()
@@ -70,8 +70,17 @@ public class TextureManager : MonoBehaviour
         foreach (GameObject obj in allObjects)
         {
             if (!obj.activeInHierarchy) continue;
+            if(!obj.GetComponent<Collider>())
+                obj.AddComponent<MeshCollider>();
 
-            if (obj.CompareTag("MAP_Trigger") || obj.CompareTag("MAP_NoCol"))
+            if (obj.CompareTag("MAP_Trigger"))
+            {
+                MeshCollider cldr = obj.GetComponent<MeshCollider>();
+                Destroy(cldr);
+                BoxCollider col = obj.AddComponent<BoxCollider>();
+                col.isTrigger = true;
+            }
+            else if (obj.CompareTag("MAP_NoCol") || obj.CompareTag("MAP_TranspNoCol"))
             {
                 Collider col = obj.GetComponent<Collider>();
                 if (col != null)

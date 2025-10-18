@@ -64,6 +64,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventHandler.cs" />
     <Compile Include="Assets\Scripts\FPCam.cs" />
     <Compile Include="Assets\Scripts\Asset Scripts\Ladder.cs" />
+    <Compile Include="Assets\Scripts\Asset Scripts\Mis0\Training_Tank.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeA.cs" />
     <Compile Include="Assets\Scripts\Weapon Scripts\Grenade.cs" />
     <Compile Include="Assets\Scripts\Asset Scripts\SmoothNormals.cs" />
@@ -112,6 +113,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshProFloatingText.cs" />
     <Compile Include="Assets\Scripts\Asset Scripts\Enemy.cs" />
     <Compile Include="Assets\Scripts\Weapon Scripts\WeaponData.cs" />
+    <Compile Include="Assets\Scripts\Scene Scripts\Particles.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ShaderPropAnimator.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
     <Compile Include="Assets\Scripts\Weapon Scripts\Weapon.cs" />
