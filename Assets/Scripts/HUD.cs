@@ -8,10 +8,17 @@ public class HUD : MonoBehaviour
     public Weapon currentWeapon;
     public TMP_Text ammoData;
     public TMP_Text weaponName;
-    // Update is called once per frame
     void Update()
     {
-        ammoData.SetText($"{currentWeapon.ammo} / {currentWeapon.magazineCount * currentWeapon.magazineSize}");
-        weaponName.SetText(currentWeapon.name);
+        if(currentWeapon == null)
+        {
+            weaponName.SetText("Weapon");
+            ammoData.SetText("X / X");
+        }
+        else
+        {
+            ammoData.SetText($"{currentWeapon.ammo} / {currentWeapon.magazineCount * currentWeapon.magazineSize}");
+            weaponName.SetText(currentWeapon.name);
+        }
     }
 }

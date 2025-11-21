@@ -17,7 +17,7 @@ public class TextureManager : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("TextureManager is alive");
+        //Debug.Log("TextureManager is alive");
         materialDict = new Dictionary<string, Material>();
         foreach (var pair in materialsByTag)
         {
@@ -62,7 +62,7 @@ public class TextureManager : MonoBehaviour
             }
         }
 
-        Debug.Log("Materials assigned based on tags.");
+        //Debug.Log("Materials assigned based on tags.");
     }
     void ApplyColliders()
     {
@@ -86,7 +86,7 @@ public class TextureManager : MonoBehaviour
                 if (col != null)
                 {
                     Destroy(col);
-                    Debug.Log($" Removed collider from: {obj.name}");
+                    //Debug.Log($" Removed collider from: {obj.name}");
                 }
             }
         }
