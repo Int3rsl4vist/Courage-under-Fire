@@ -18,7 +18,7 @@ public abstract class Weapon : MonoBehaviour, IDataPersistance
     public float reloadSpeed;
     public bool isShooting = false;
     public bool readyToShoot = true;
-    public AudioSource audio;
+    public AudioSource weaponAudio;
     public AudioClip equipClip;
     public AudioClip shotClip;
     public AudioClip reloadClip;
@@ -28,7 +28,7 @@ public abstract class Weapon : MonoBehaviour, IDataPersistance
     {
         fireRate /= 60f;
         ammo = magazineSize;
-        audio = GetComponent<AudioSource>();
+        weaponAudio = GetComponent<AudioSource>();
     }
     private void Update()
     {
@@ -60,7 +60,7 @@ public abstract class Weapon : MonoBehaviour, IDataPersistance
     public IEnumerator AttackCoroutine()
     {
         isShooting = true;
-        audio.PlayOneShot(shotClip);
+        weaponAudio.PlayOneShot(shotClip);
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if(Physics.Raycast(ray, out hit))
@@ -87,7 +87,7 @@ public abstract class Weapon : MonoBehaviour, IDataPersistance
     public IEnumerator ReloadCoroutine()
     {
         readyToShoot = false;
-        audio.PlayOneShot(reloadClip);
+        weaponAudio.PlayOneShot(reloadClip);
         magazineCount--;
         yield return new WaitForSeconds(1f);
         ammo = magazineSize;

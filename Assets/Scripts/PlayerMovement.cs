@@ -72,7 +72,7 @@ public class PlayerMovement : MonoBehaviour
     private void CheckGroundStatus()
     {
         isGrounded = Physics.CheckSphere(transform.position, playerHeight + 0.25f, groundLayer);
-        rb.drag = isGrounded ? groundDrag : 0;
+        rb.linearDamping = isGrounded ? groundDrag : 0;
     }
     public void CheckSlope()
     {
@@ -173,14 +173,14 @@ public class PlayerMovement : MonoBehaviour
             else if (onSlope)
             {
                 rb.AddForce(1.5f * moveSpeed * moveDirection.normalized, ForceMode.Force);
-                rb.drag *= 2;
+                rb.linearDamping *= 2;
             }
             else if (!isGrounded && !onSlope)
                 rb.AddForce(5f * airMultiplier * moveSpeed * moveDirection.normalized, ForceMode.Force);
         }
         else
         {
-            rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, rb.velocity.z);
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y, rb.linearVelocity.z);
         }
     }
     private float GetMoveSpeed(Stance stance)
@@ -195,7 +195,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isGrounded || onSlope)
         {
-            rb.velocity = new(rb.velocity.x, 0f, rb.velocity.z);
+            rb.linearVelocity = new(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
             rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
         }
     }

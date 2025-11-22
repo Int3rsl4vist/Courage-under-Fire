@@ -31,7 +31,7 @@ public class TextureManager : MonoBehaviour
 
     void ApplyMaterials()
     {
-        GameObject[] allObjects = FindObjectsOfType<GameObject>();
+        GameObject[] allObjects = FindObjectsByType<GameObject>(FindObjectsSortMode.None);
 
         foreach (GameObject obj in allObjects)
         {
@@ -66,7 +66,7 @@ public class TextureManager : MonoBehaviour
     }
     void ApplyColliders()
     {
-        GameObject[] allObjects = FindObjectsOfType<GameObject>();
+        GameObject[] allObjects = FindObjectsByType<GameObject>(FindObjectsSortMode.None);
         foreach (GameObject obj in allObjects)
         {
             if (!obj.activeInHierarchy) continue;
