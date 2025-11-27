@@ -80,6 +80,7 @@
     <Compile Include="Assets\Scripts\Asset Scripts\Teammate.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshSpawner.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
+    <Compile Include="Assets\Scripts\AI Scripts\AIMovement.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
     <Compile Include="Assets\Scripts\Weapon Scripts\RPG.cs" />
     <Compile Include="Assets\Objects\Items\Item Scripts\DefaultObject.cs" />
@@ -125,9 +126,9 @@
     <Compile Include="Assets\Scripts\Weapon Scripts\Weapon.cs" />
     <Compile Include="Assets\Scripts\DataHandler\FileDataHandler.cs" />
     <Compile Include="Assets\Scripts\Scene Scripts\SaveLoadManager.cs" />
-    <Compile Include="Assets\Scripts\AIMovement.cs" />
     <Compile Include="Assets\Scripts\MoveFPCam.cs" />
     <Compile Include="Assets\Scripts\DataHandler\Data\GameData.cs" />
+    <Compile Include="Assets\Scripts\AI Scripts\RegionTrigger.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextInfoDebugTool.cs" />
     <Compile Include="Assets\Scripts\HUD.cs" />
   </ItemGroup>

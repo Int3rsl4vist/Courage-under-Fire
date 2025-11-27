@@ -1,4 +1,3 @@
-
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -7,7 +6,9 @@ public class AIMovement : MonoBehaviour
     public NavMeshAgent agent;
     [Tooltip("Drag the destination object here")]
     public Transform targetDestination;
+
     private bool _hasArrived = false;
+    private bool _hasStarted = false;
 
     private void Start()
     {
@@ -18,11 +19,10 @@ public class AIMovement : MonoBehaviour
             Debug.LogError("CODE_ERROR: No Target Destination assigned in Inspector");
             return;
         }
-        SetDestinationToTarget();
     }
     private void Update()
     {
-        if (!_hasArrived)
+        if (_hasStarted && !_hasArrived)
         {
             if(!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
             {
@@ -34,8 +34,10 @@ public class AIMovement : MonoBehaviour
             }
         }
     }
-    void SetDestinationToTarget()
+    public void SetDestinationToTarget()
     {
+        if (targetDestination == null)
+            return;
         if (NavMesh.SamplePosition(targetDestination.position, out NavMeshHit hit, 2.0f, NavMesh.AllAreas))
         {
             NavMeshPath path = new();
@@ -43,12 +45,14 @@ public class AIMovement : MonoBehaviour
             if (path.status == NavMeshPathStatus.PathComplete)
             {
                 agent.SetDestination(hit.position);
+                _hasStarted = true;
                 Debug.Log("CODE_LOG: Target reachable, initiating movement");
             }
             else if (path.status == NavMeshPathStatus.PathPartial)
             {
-                Debug.LogWarning("CODE_WARNING: Target is unreachable. Something is blocking the path. Moving as close as possible");
                 agent.SetDestination(hit.position);
+                _hasStarted = true;
+                Debug.LogWarning("CODE_WARNING: Target is unreachable. Something is blocking the path. Moving as close as possible");
             }
             else
                 Debug.LogError("CODE_ERROR: Target is invalid");
