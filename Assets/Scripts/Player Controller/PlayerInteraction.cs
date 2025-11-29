@@ -1,92 +1,39 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Net.Security;
 using UnityEngine;
 using UnityEngine.UI;
 
 
 public class PlayerInteraction : MonoBehaviour
 {
-    public float interactionDistance;
+    public float interactionDistance = 3f;
     public GameObject interactionText;
 
-    //public List<string> animationNames = new() { "DoorOpen", "DoorClose", "CrateOpen", "CrateClose" };
-
-    protected KeyCode interactionKey;
+    private KeyCode _interactionKey = KeyCode.F;
+    private Camera _cam;
 
     private void Start()
     {
-        interactionKey = KeyCode.F;
+        if (_cam == null)
+            _cam = Camera.main;
+        if (_cam == null)
+            Debug.LogError("CODE_ERROR: No Camera with the 'MainCamera' tag found");
     }
 
     private void Update()
     {
         Ray ray = new(transform.position, transform.forward);
+        bool hitInteractableObject = false;
         if (Physics.Raycast(ray, out RaycastHit hit, interactionDistance))
         {
-            if(interactionText != null)
+            if(hit.collider.TryGetComponent(out ObjectController interactableObject))
             {
-                interactionText.SetActive(true);
+                hitInteractableObject = true;
+                if (Input.GetKeyDown(_interactionKey))
+                    interactableObject.Interact();
             }
-            if (hit.collider.gameObject.CompareTag("Door"))
-            {
-                GameObject doorMover = hit.collider.transform.parent.parent.gameObject;
-                Animator doorAnimator = doorMover.GetComponent<Animator>();
-
-
-                if (Input.GetKeyDown(interactionKey))
-                {
-                    if (doorAnimator.GetCurrentAnimatorStateInfo(0).IsName("DoorOpen"))
-                    {
-                        doorAnimator.ResetTrigger("Open");
-                        doorAnimator.SetTrigger("Close");
-                        Debug.Log($"Door open!");
-                    }
-                    else if (doorAnimator.GetCurrentAnimatorStateInfo(0).IsName("DoorClose"))
-                    {
-                        doorAnimator.ResetTrigger("Close");
-                        doorAnimator.SetTrigger("Open");
-                    }
-                }
-            }
-            /*else if (hit.collider.gameObject.CompareTag("Weapon"))
-            {
-                interactionText.SetActive(true);
-                if(Input.GetKeyDown(interKey))
-                {
-                    Destroy(hit.collider.gameObject);
-                    
-                }
-            }*/
-            else if (hit.collider.gameObject.CompareTag("AmmoCrate"))
-            {
-                GameObject mover = hit.collider.transform.parent.gameObject;
-                Animator anim = mover.GetComponent<Animator>();
-                if (Input.GetKeyDown(interactionKey))
-                {
-                    if (anim.GetCurrentAnimatorStateInfo(0).IsName("CrateOpen"))
-                    {
-                        anim.ResetTrigger("Open");
-                        anim.SetTrigger("Close");
-                    }
-                    else if (anim.GetCurrentAnimatorStateInfo(0).IsName("CrateClose"))
-                    {
-                        anim.ResetTrigger("Close");
-                        anim.SetTrigger("Open");
-                    }
-
-                    // Debug all animations in the dictionary
-                    /*foreach (string animation in animationNames)
-                    {
-                        Debug.Log($"Animation: {animation}");
-                    }*/
-                }
-            }
-            else
-            {
-                interactionText.SetActive(false);
-            }
+        }
+        if(interactionText != null)
+        {
+            interactionText.SetActive(hitInteractableObject);
         }
     }
 }

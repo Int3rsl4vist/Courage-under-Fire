@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class RegionTrigger : MonoBehaviour
+public class RegionTrigger_NPC : MonoBehaviour
 {
     [Tooltip("Drag the NPC with the AIMovement script here")]
     public AIMovement npcScript;

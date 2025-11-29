@@ -63,8 +63,10 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Player Controller\PlayerInteraction.cs" />
     <Compile Include="Assets\Scripts\Player Controller\PlayerJumping.cs" />
+    <Compile Include="Assets\Scripts\Player Controller\ObjectController.cs" />
     <Compile Include="Assets\Scripts\Player Controller\PlayerCrouching.cs" />
     <Compile Include="Assets\Scripts\Player Controller\Player.cs" />
+    <Compile Include="Assets\Scripts\Player Controller\RegionTrigger_Door.cs" />
     <Compile Include="Assets\Scripts\Player Controller\PlayerStats.cs" />
     <Compile Include="Assets\Scripts\Player Controller\PlayerSprinting.cs" />
   </ItemGroup>
