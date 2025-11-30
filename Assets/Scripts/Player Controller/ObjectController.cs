@@ -10,16 +10,24 @@ public class ObjectController : MonoBehaviour
 
     public string openStateName = "DoorOpen";
     public string closeStateName = "DoorClose";
+    public bool mirrorAnimation = false;
 
     [Header("Auto-Close")]
     public bool enableAutoClose = false;
     public float autoCloseDelay = 5f;
 
+    [Header("Optimalization")]
+    public OcclusionPortal portal;
+
     private Coroutine _timer;
     private void Awake()
     {
         if(animator == null)
-            animator = GetComponentInParent<Animator>();
+            animator = GetComponent<Animator>();
+        if(portal  == null)
+            portal = GetComponent<OcclusionPortal>();
+        if(animator != null)
+            animator.SetBool("Mirror", mirrorAnimation);
     }
     public void Interact()
     {
@@ -38,6 +46,8 @@ public class ObjectController : MonoBehaviour
             return;
         animator.ResetTrigger(closeTrigger);
         animator.SetTrigger(openTrigger);
+        if (portal != null)
+            portal.open = true;
         if (enableAutoClose)
         {
             if (_timer != null)
@@ -56,6 +66,8 @@ public class ObjectController : MonoBehaviour
         }
         animator.ResetTrigger(openTrigger);
         animator.SetTrigger(closeTrigger);
+        if(portal != null)
+            portal.open = false;
     }
     private IEnumerator AutoCloseCoroutine()
     {
