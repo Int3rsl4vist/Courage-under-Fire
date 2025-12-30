@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
 
 public class MissionManager : MonoBehaviour
 {
@@ -10,6 +11,12 @@ public class MissionManager : MonoBehaviour
     public TextMeshProUGUI objectiveText;
     public GameObject missionCompleteScreen;
     public GameObject missionFailedScreen;
+
+    [Header("HUD:")]
+    public GameObject hud;
+
+    [Header("Player Controller:")]
+    public MonoBehaviour playerController;
 
     [Header("Settings:")]
     public string currentObjective = "";
@@ -31,11 +38,16 @@ public class MissionManager : MonoBehaviour
             missionCompleteScreen.SetActive(false);
         if(missionFailedScreen != null)
             missionFailedScreen.SetActive(false);
+        if(hud != null) 
+            hud.SetActive(true);
     }
     private void Update()
     {
         if(gameOver && Input.GetKeyDown(KeyCode.Escape))
+        {
+            Time.timeScale = 1f;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
     public void UpdateObjective(string newObjective)
     {
@@ -46,32 +58,39 @@ public class MissionManager : MonoBehaviour
     {
         if (gameOver)
             return;
-        Debug.Log("CODE_LOG: Mission Complete");
-        gameOver = true;
-        if(missionCompleteScreen != null)
-            missionCompleteScreen.SetActive(true);
-        FreezeGame();
+        //Debug.Log("CODE_LOG: Mission Complete");
+        EndGame(true);
     }
     public void FailMission(string reason)
     {
         if (gameOver)
             return;
-        Debug.Log($"CODE_LOG: Mission failed: {reason}");
+        //Debug.Log($"CODE_LOG: Mission failed: {reason}");
         if(objectiveText != null)
             objectiveText.text = $"MISSION FAILED: {reason}";
-        if(missionFailedScreen != null)
-            missionFailedScreen.SetActive(false);
-        FreezeGame();
+        EndGame(false);
+    }
+    private void EndGame(bool hasPlayerWon)
+    {
+        Debug.Log($"CODE_LOG: Game Over. Won: {hasPlayerWon}");
+        gameOver = true;
+
+        if(hud != null)
+            hud.SetActive(false);
+        if(playerController != null)
+            playerController.enabled = false;
+        if(hasPlayerWon && missionCompleteScreen != null)
+            missionCompleteScreen.SetActive(true);
+        else if(!hasPlayerWon && missionFailedScreen != null)
+            missionFailedScreen.SetActive(true);
+
+        Time.timeScale = 0f;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
     private void UpdateObjectiveText()
     {
         if (objectiveText != null)
             objectiveText.text = $"Objective: {currentObjective}";
-    }
-    private void FreezeGame()
-    {
-        Time.timeScale = 0f;
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
     }
 }

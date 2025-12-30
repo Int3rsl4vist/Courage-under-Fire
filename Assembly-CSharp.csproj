@@ -94,6 +94,7 @@
     <Compile Include="Assets\Scripts\DataHandler\IDataPersistance.cs" />
     <Compile Include="Assets\Scripts\Weapon Scripts\Rifle.cs" />
     <Compile Include="Assets\Scripts\Weapon Scripts\Handgun.cs" />
+    <Compile Include="Assets\Scripts\Asset Scripts\MissionObjective.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Weapon Scripts\Explosive.cs" />
     <Compile Include="Assets\Scripts\Asset Scripts\Ladder.cs" />
@@ -120,6 +121,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_UiFrameRateCounter.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
+    <Compile Include="Assets\Scripts\AI Scripts\EnemyVision_FailWhenSeen.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_B.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SkewTextExample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
