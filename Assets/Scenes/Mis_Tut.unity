@@ -49396,7 +49396,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dbb19967c38d75429a852eb02cd99cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  footstepSource: {fileID: 0}
+  footstepSource: {fileID: 1653662681}
   stepSounds:
   - {fileID: 8300000, guid: f792ac6badf0aab4eae94eab53a8ea58, type: 3}
   - {fileID: 8300000, guid: e74693777b96241418c9127eb8c69551, type: 3}
