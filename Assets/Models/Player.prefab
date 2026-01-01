@@ -390,7 +390,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1195669489275485778}
-  - component: {fileID: 7896868191658874633}
   - component: {fileID: 6012132423074771694}
   - component: {fileID: 2780599697220354394}
   - component: {fileID: 1671811729484585571}
@@ -398,6 +397,7 @@ GameObject:
   - component: {fileID: 3274542617047569766}
   - component: {fileID: 4049696057042175328}
   - component: {fileID: 3156194824510675697}
+  - component: {fileID: 1590670570779293869}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -426,37 +426,6 @@ Transform:
   - {fileID: 6400224112364555233}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7896868191658874633
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4892016332910561601}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df7cdfa7de7751e4493cc16d80c51a1b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 7
-  groundDrag: 5
-  jumpForce: 5
-  jumpCooldown: 0.25
-  airMultiplier: 0.01
-  isCrouching: 0
-  isLying: 0
-  currentStance: 0
-  speedIndicator: 1
-  transitionSpeed: 4
-  originalScale: {x: 0, y: 0, z: 0}
-  playerHeight: 2
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  isGrounded: 0
-  onSlope: 0
-  playerRotation: {fileID: 6747529152051109970}
-  playerModel: {fileID: 6250601480726978028}
 --- !u!114 &6012132423074771694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -594,6 +563,20 @@ MonoBehaviour:
     material: {fileID: 2100000, guid: 0f71b2351ff2f9f449cca22fdc43ceec, type: 2}
   - tag: MAP_TranspNoCol
     material: {fileID: 2100000, guid: 0f71b2351ff2f9f449cca22fdc43ceec, type: 2}
+--- !u!114 &1590670570779293869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4892016332910561601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72a8877bc3f294543bb2a9155a77c973, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionDistance: 5
+  interactionText: {fileID: 0}
 --- !u!1 &6263911274815572985
 GameObject:
   m_ObjectHideFlags: 0
