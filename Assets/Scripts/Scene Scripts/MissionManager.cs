@@ -1,16 +1,29 @@
 using UnityEngine;
 using TMPro;
-using UnityEngine.SceneManagement;
-using Unity.VisualScripting;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
+
+[System.Serializable]
+public class MissionSubStep
+{
+    public string subStepID;
+    public string description;
+    public bool isCompleted;
+}
 
 [System.Serializable]
 public class MissionStep
 {
+    [Header("Main Objective:")]
     public string stepName;
-    public string stepDescription;
+    public string description;
     public bool isCompleted;
+
+    [Header("Sub-Step Settings:")]
+    public bool enforceSubOrder;
+    public List<MissionSubStep> subSteps = new();
 }
+
 public class MissionManager : MonoBehaviour
 {
     public static MissionManager Instance;
@@ -26,12 +39,7 @@ public class MissionManager : MonoBehaviour
 
     [Header("Mission Config:")]
     public List<MissionStep> missionSteps = new();
-
-    [SerializeField]
-    AudioSource audioSource;
-    AudioClip stepCompleteAudio;
-
-    public bool enforceOrder = true;
+    public bool enforceMainOrder = true;
 
     private bool isGameOver = false;
 
@@ -61,48 +69,99 @@ public class MissionManager : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
-    public void CompleteStep(string nameOfStep)
+    public void CompleteStep(string idToComplete)
     {
-        if (isGameOver)
-            return;
+        if (isGameOver) return;
 
-        MissionStep stepToComplete = missionSteps.Find(x => x.stepName == nameOfStep);
+        // 1. Nejprve zkusíme najít, jestli to není HLAVNÍ úkol (bez podúkolù)
+        MissionStep mainStep = missionSteps.Find(x => x.stepName == idToComplete);
 
-        if (stepToComplete != null)
+        if (mainStep != null)
         {
-            if (enforceOrder)
-            {
-                int i = missionSteps.IndexOf(stepToComplete);
+            // Je to hlavní úkol. Má podúkoly? Pokud ano, nemìl by jít splnit pøímo!
+            if (mainStep.subSteps.Count > 0)
+                return;
 
-                if (i > 0 && !missionSteps[i - 1].isCompleted)
-                {
-                    Debug.Log($"CODE_LOG: {nameOfStep} can't be completed until the previous objective is completed");
-                    return;
-                }
-            }
-            if (!stepToComplete.isCompleted)
-            {
-                stepToComplete.isCompleted = true;
-                Debug.Log($"CODE_LOG: Objective '{stepToComplete.stepDescription}' complete");
+            CompleteMainStepLogic(mainStep);
+            return;
+        }
 
-                bool allStepsFinished = true;
-                foreach (var step in missionSteps)
+        foreach (var step in missionSteps)
+        {
+            if (step.isCompleted) continue;
+
+            MissionSubStep subStep = step.subSteps.Find(x => x.subStepID == idToComplete);
+
+            if (subStep != null)
+            {
+                if (enforceMainOrder)
                 {
-                    if(!step.isCompleted) allStepsFinished = false;
+                    int mainIndex = missionSteps.IndexOf(step);
+                    if (mainIndex > 0 && !missionSteps[mainIndex - 1].isCompleted)
+                    {
+                        Debug.Log("CODE_LOG: You can't complete Sub-Steps until the prevous objective is completed");
+                        return;
+                    }
                 }
-                if (allStepsFinished)
+                if (step.enforceSubOrder)
                 {
-                    EndGame(true);
+                    int subIndex = step.subSteps.IndexOf(subStep);
+                    if (subIndex > 0 && !step.subSteps[subIndex - 1].isCompleted)
+                    {
+                        Debug.Log("CODE_LOG: Complete Sub-Steps in order");
+                        return;
+                    }
                 }
-                else
+                if (!subStep.isCompleted)
                 {
-                    AudioManager.Instance?.PlayObjectiveComplete();
+                    subStep.isCompleted = true;
+
+                    Debug.Log($"CODE_LOG: Sub-Step '{subStep.description}' completed");
+
+                    CheckIfMainStepIsFinished(step);
                     UpdateObjectiveUI();
                 }
+                return;
             }
         }
-        else
-            Debug.LogWarning($"CODE_WARNING: This objective is null");
+
+        Debug.LogWarning($"CODE_WARNING: Step ID '{idToComplete}' not found");
+    }
+    void CheckIfMainStepIsFinished(MissionStep step)
+    {
+        bool allSubsDone = true;
+        foreach(var subStep in step.subSteps)
+            if(!subStep.isCompleted) allSubsDone = false;
+        if (allSubsDone)
+            CompleteMainStepLogic(step);
+    }
+    void CompleteMainStepLogic(MissionStep step)
+    {
+        if (enforceMainOrder)
+        {
+            int i = missionSteps.IndexOf(step);
+            if (i > 0 && !missionSteps[i - 1].isCompleted) return;
+        }
+        if (!step.isCompleted)
+        {
+            step.isCompleted = true;
+
+            Debug.Log($"CODE_LOG: Main objective ({step.description}) completed");
+
+            CheckWinCondition();
+
+            if (!isGameOver)
+                UpdateObjectiveUI();
+        }
+    }
+    void CheckWinCondition()
+    {
+        bool allDone = true;
+
+        foreach (var step in missionSteps)
+            if (!step.isCompleted) return;
+        if(allDone)
+            EndGame(true);
     }
     public void FailMission(string reason)
     {
@@ -140,13 +199,25 @@ public class MissionManager : MonoBehaviour
     }
     private void UpdateObjectiveUI()
     {
-        if (objectiveText == null)
-            return;
+        if (objectiveText == null) return;
+
         MissionStep curStep = missionSteps.Find(x => !x.isCompleted);
 
         if (curStep != null)
-            objectiveText.SetText($"Objective: \n {curStep.stepDescription}");
+        {
+            string finalText = $"OBJECTIVE: \n {curStep.description} \n\n";
+
+            foreach (var sub in curStep.subSteps)
+            {
+                if (sub.isCompleted)
+                    finalText += $"<s><color=green>- {sub.description} </color></s>\n";
+                else
+                    finalText += $"- {sub.description} \n";
+            }
+
+            objectiveText.text = finalText;
+        }
         else
-            objectiveText.SetText("Objective \n Escape!");
+            objectiveText.text = "";
     }
 }

@@ -95,7 +95,6 @@
     <Compile Include="Assets\Scripts\DataHandler\IDataPersistance.cs" />
     <Compile Include="Assets\Scripts\Weapon Scripts\Rifle.cs" />
     <Compile Include="Assets\Scripts\Weapon Scripts\Handgun.cs" />
-    <Compile Include="Assets\Scripts\Asset Scripts\MissionObjective.cs" />
     <Compile Include="Assets\PlayerFootsteps.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Weapon Scripts\Explosive.cs" />
@@ -107,6 +106,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMPro_InstructionOverlay.cs" />
     <Compile Include="Assets\Scripts\Asset Scripts\Door.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeB.cs" />
+    <Compile Include="Assets\Scripts\Trigger Scripts\MissionTriggerGroup.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\DropdownSample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexColorCycler.cs" />
     <Compile Include="Assets\Scripts\Scene Scripts\MissionManager.cs" />
@@ -129,6 +129,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshProFloatingText.cs" />
     <Compile Include="Assets\Scripts\Asset Scripts\Enemy.cs" />
+    <Compile Include="Assets\Scripts\Trigger Scripts\MissionTrigger.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ShaderPropAnimator.cs" />
     <Compile Include="Assets\Scripts\Weapon Scripts\Weapon.cs" />
     <Compile Include="Assets\Scripts\DataHandler\FileDataHandler.cs" />
