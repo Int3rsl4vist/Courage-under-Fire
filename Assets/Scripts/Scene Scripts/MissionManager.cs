@@ -72,26 +72,20 @@ public class MissionManager : MonoBehaviour
     public void CompleteStep(string idToComplete)
     {
         if (isGameOver) return;
-
-        // 1. Nejprve zkusíme najít, jestli to není HLAVNÍ úkol (bez podúkolù)
         MissionStep mainStep = missionSteps.Find(x => x.stepName == idToComplete);
-
         if (mainStep != null)
         {
-            // Je to hlavní úkol. Má podúkoly? Pokud ano, nemìl by jít splnit pøímo!
             if (mainStep.subSteps.Count > 0)
                 return;
 
             CompleteMainStepLogic(mainStep);
             return;
         }
-
         foreach (var step in missionSteps)
         {
             if (step.isCompleted) continue;
 
             MissionSubStep subStep = step.subSteps.Find(x => x.subStepID == idToComplete);
-
             if (subStep != null)
             {
                 if (enforceMainOrder)
@@ -124,7 +118,6 @@ public class MissionManager : MonoBehaviour
                 return;
             }
         }
-
         Debug.LogWarning($"CODE_WARNING: Step ID '{idToComplete}' not found");
     }
     void CheckIfMainStepIsFinished(MissionStep step)
@@ -147,7 +140,7 @@ public class MissionManager : MonoBehaviour
             step.isCompleted = true;
 
             Debug.Log($"CODE_LOG: Main objective ({step.description}) completed");
-
+            AudioManager.Instance?.PlayObjectiveComplete();
             CheckWinCondition();
 
             if (!isGameOver)

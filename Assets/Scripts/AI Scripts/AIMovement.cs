@@ -36,18 +36,22 @@ public class AIMovement : MonoBehaviour
     }
     public void SetDestinationToTarget()
     {
+        // Pokud není pøiøazen cíl cesty, postava se nebude hýbat
         if (targetDestination == null)
             return;
         if (NavMesh.SamplePosition(targetDestination.position, out NavMeshHit hit, 2.0f, NavMesh.AllAreas))
         {
+            // Výpoèet cesty k cíli
             NavMeshPath path = new();
             agent.CalculatePath(hit.position, path);
+            // Úspìšné vytvoøení cesty -> postava se zaène pohybovat k cíli
             if (path.status == NavMeshPathStatus.PathComplete)
             {
                 agent.SetDestination(hit.position);
                 _hasStarted = true;
                 Debug.Log("CODE_LOG: Target reachable, initiating movement");
             }
+            // Cesta je vytvoøena, ale je blokována -> postava dojde co nejblíž k cíli
             else if (path.status == NavMeshPathStatus.PathPartial)
             {
                 agent.SetDestination(hit.position);

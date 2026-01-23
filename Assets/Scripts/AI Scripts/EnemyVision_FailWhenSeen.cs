@@ -37,43 +37,29 @@ public class EnemyVision_FailWhenSeen : MonoBehaviour
 
     void FindVisibleTarget()
     {
-        // 1. VZDÁLENOST
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
-        // DEBUG: Kreslíme èáru k hráèi VŽDY (Èervená = smìr k hráèi)
         Debug.DrawLine(eyes.position, player.position, Color.red);
-
-        // DEBUG: Kreslíme, kam se NPC dívá (Modrá = "Pøedek" NPCèka)
-        // Kreslíme to 2 metry dlouhé, aby to bylo vidìt
         Debug.DrawRay(eyes.position, transform.forward * 2f, Color.blue);
 
         if (distanceToPlayer < viewRadius)
         {
             Vector3 dirToPlayer = (player.position - transform.position).normalized;
-
-            // Plochá matematika (ignorujeme Y)
             Vector3 flatForward = transform.forward; flatForward.y = 0;
             Vector3 flatDir = dirToPlayer; flatDir.y = 0;
-
             float angle = Vector3.Angle(flatForward, flatDir);
-
-            // Tady si vypíšeme ten úhel, a vidíme, co se dìje
-            // Pokud je úhel tøeba 180, znamená to, že NPC kouká dozadu!
-            // Debug.Log("Aktuální úhel: " + angle); 
 
             if (angle < viewAngle / 2)
             {
-                // Tady byla ta zelená èára, ke které ses nedostal...
                 Vector3 startPos = eyes.position;
                 Vector3 targetPos = player.position + Vector3.up * 1.5f;
 
-                // ZELENÁ = Vidím tì v úhlu, zkouším Raycast
                 Debug.DrawLine(startPos, targetPos, Color.green);
 
                 RaycastHit hit;
                 if (!Physics.Linecast(startPos, targetPos, out hit, obstacleMask))
                 {
-                    Debug.Log("MÁM TÌ!");
+                    Debug.Log("CODE_LOG: Player caught");
                     CatchPlayer();
                 }
             }
