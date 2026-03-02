@@ -55,7 +55,7 @@
     <UnityVersion>6000.0.29f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
+    <Analyzer Include="C:\Program Files\Microsoft Visual Studio\18\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
     <Analyzer Include="B:\Unity\Hub\Editor\6000.0.29f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
     <Analyzer Include="B:\Unity\Hub\Editor\6000.0.29f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
     <Analyzer Include="B:\Unity\Hub\Editor\6000.0.29f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
@@ -67,12 +67,13 @@
     <Compile Include="Assets\Scripts\Asset Scripts\SmoothNormals.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\EnvMapAnimator.cs" />
     <Compile Include="Assets\Objects\Items\Item Scripts\EquipmentObject.cs" />
+    <Compile Include="Assets\Scripts\PlayerCombat.cs" />
+    <Compile Include="Assets\Scripts\HeadBob.cs" />
     <Compile Include="Assets\Scripts\Asset Scripts\Bullet.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_A.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SimpleScript.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark04.cs" />
-    <Compile Include="Assets\Scripts\Weapon Scripts\Melee.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ChatController.cs" />
     <Compile Include="Assets\Scripts\AI Scripts\Patrol.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_DigitValidator.cs" />
@@ -81,26 +82,24 @@
     <Compile Include="Assets\Scripts\Asset Scripts\Teammate.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshSpawner.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
+    <Compile Include="Assets\Scripts\Asset Scripts\IDamageable.cs" />
     <Compile Include="Assets\Scripts\AI Scripts\AIMovement.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
-    <Compile Include="Assets\Scripts\Weapon Scripts\RPG.cs" />
+    <Compile Include="Assets\Scripts\AI Scripts\DialogueSpeaker.cs" />
     <Compile Include="Assets\Objects\Items\Item Scripts\DefaultObject.cs" />
-    <Compile Include="Assets\Scripts\Weapon Scripts\LMG.cs" />
-    <Compile Include="Assets\Scripts\Weapon Scripts\Knife.cs" />
+    <Compile Include="Assets\Scripts\Asset Scripts\Climbable.cs" />
     <Compile Include="Assets\Scripts\Scene Scripts\AudioManager.cs" />
-    <Compile Include="Assets\Scripts\Weapon Scripts\WeaponData.cs" />
+    <Compile Include="Assets\Scripts\HUDManager.cs" />
+    <Compile Include="Assets\Scripts\TargetSequenceManager.cs" />
     <Compile Include="Assets\Scripts\Scene Scripts\Particles.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
+    <Compile Include="Assets\Scripts\DataHandler\Data\SerializableDictionary.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
     <Compile Include="Assets\Scripts\DataHandler\IDataPersistance.cs" />
-    <Compile Include="Assets\Scripts\Weapon Scripts\Rifle.cs" />
     <Compile Include="Assets\Scripts\Weapon Scripts\Handgun.cs" />
-    <Compile Include="Assets\PlayerFootsteps.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
-    <Compile Include="Assets\Scripts\Weapon Scripts\Explosive.cs" />
-    <Compile Include="Assets\Scripts\Asset Scripts\Ladder.cs" />
+    <Compile Include="Assets\Scripts\Weapon Scripts\WeaponInteraction.cs" />
     <Compile Include="Assets\Scripts\Asset Scripts\Mis0\Training_Tank.cs" />
-    <Compile Include="Assets\Scripts\Weapon Scripts\Grenade.cs" />
     <Compile Include="Assets\Objects\Items\Item Scripts\MedicalObject.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_ExampleScript_01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMPro_InstructionOverlay.cs" />
@@ -109,12 +108,14 @@
     <Compile Include="Assets\Scripts\Trigger Scripts\MissionTriggerGroup.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\DropdownSample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexColorCycler.cs" />
+    <Compile Include="Assets\Scripts\AI Scripts\DialogueSequence.cs" />
     <Compile Include="Assets\Scripts\Scene Scripts\MissionManager.cs" />
     <Compile Include="Assets\Scripts\Scene Scripts\TextureManager.cs" />
+    <Compile Include="Assets\Scripts\ShootingTarget.cs" />
     <Compile Include="Assets\Objects\Items\Item Scripts\ItemObject.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ObjectSpin.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_PhoneNumberValidator.cs" />
-    <Compile Include="Assets\Scripts\Weapon Scripts\HMG.cs" />
+    <Compile Include="Assets\Scripts\Weapon Scripts\SMG.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexJitter.cs" />
     <Compile Include="Assets\Scripts\Trigger Scripts\RegionTrigger_NPC.cs" />
     <Compile Include="Assets\Scripts\DataHandler\DataPersistanceManager.cs" />
@@ -124,6 +125,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_UiFrameRateCounter.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
     <Compile Include="Assets\Scripts\AI Scripts\EnemyVision_FailWhenSeen.cs" />
+    <Compile Include="Assets\Scripts\Weapon Scripts\WeaponSway.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_B.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SkewTextExample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
@@ -137,7 +139,6 @@
     <Compile Include="Assets\Scripts\MoveFPCam.cs" />
     <Compile Include="Assets\Scripts\DataHandler\Data\GameData.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextInfoDebugTool.cs" />
-    <Compile Include="Assets\Scripts\HUD.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -1153,6 +1154,10 @@
     </Reference>
     <Reference Include="Unity.Multiplayer.Center.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Multiplayer.Center.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.2D.Sprite.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">

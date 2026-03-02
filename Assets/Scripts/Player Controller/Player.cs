@@ -1,21 +1,21 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+// Tohle ti zachrání prdel, když omylem smažeš komponenty v Inspectoru
+[RequireComponent(typeof(CharacterController), typeof(PlayerInput))]
 public class Player : MonoBehaviour
 {
     [Header("Cam Settings")]
     [SerializeField] float mouseSens = 3f;
-    [SerializeField] public Transform camTransform;
-    
+    public Transform camTransform;
+
     [Header("Move Settings")]
     [SerializeField] float moveSpeed = 5f;
     [SerializeField] float climbingSpeed = 2.5f;
     [SerializeField] float mass = 1.5f;
     [SerializeField] float acceleration = 20f;
-    [SerializeField] float BottomWorldBoundary = -30f;
+    [SerializeField] float bottomWorldBoundary = -30f;
 
     public bool IsGrounded => controller.isGrounded;
 
@@ -28,10 +28,11 @@ public class Player : MonoBehaviour
     public event Action OnBeforeMove;
     public event Action<bool> OnGroundStateChange;
 
-    internal float speedMultiplier;
+    internal float speedMultiplier = 1f;
+    internal Vector3 velocity;
 
+    public enum State { Walking, Climbing }
     private State _state;
-
     public State CurrentState
     {
         get => _state;
@@ -41,49 +42,36 @@ public class Player : MonoBehaviour
             velocity = Vector3.zero;
         }
     }
-    public enum State
-    {
-        Walking, Climbing
-    }
 
-    CharacterController controller;
-    internal Vector3 velocity;
-    Vector2 lookDirection;
+    private CharacterController controller;
+    private PlayerInput controls;
+    private InputAction moveAction;
+    private InputAction lookAction;
 
-    (Vector3, Quaternion) curPosAndRot;
-
-    bool wasGrounded;
-
-    PlayerInput controls;
-    InputAction moveAction;
-    InputAction lookAction;
+    private Vector2 lookDirection;
+    private (Vector3 pos, Quaternion rot) startPosAndRot;
+    private bool wasGrounded;
 
     private void Awake()
     {
         controller = GetComponent<CharacterController>();
         controls = GetComponent<PlayerInput>();
+
         moveAction = controls.actions["Move"];
         lookAction = controls.actions["Look"];
     }
 
-    void Start()
+    private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        curPosAndRot = (transform.position, transform.rotation);
+        startPosAndRot = (transform.position, transform.rotation);
+        lookDirection.x = transform.eulerAngles.y;
     }
 
-    void Teleport(Vector3 position, Quaternion rotation)
-    {
-        transform.position = position;
-        Physics.SyncTransforms();
-        lookDirection.x = rotation.eulerAngles.y;
-        lookDirection.y = rotation.eulerAngles.z;
-        velocity = Vector3.zero;
-    }
-    
-    void Update()
+    private void Update()
     {
         speedMultiplier = 1f;
+
         switch (CurrentState)
         {
             case State.Walking:
@@ -93,6 +81,7 @@ public class Player : MonoBehaviour
                 UpdateLook();
                 CheckBounds();
                 break;
+
             case State.Climbing:
                 UpdateMovementClimbing();
                 UpdateLook();
@@ -102,16 +91,26 @@ public class Player : MonoBehaviour
 
     private void CheckBounds()
     {
-        if(transform.position.y < BottomWorldBoundary)
+        if (transform.position.y < bottomWorldBoundary)
         {
-            var(position, rotation) = curPosAndRot;
-            Teleport(position, rotation);
+            Teleport(startPosAndRot.pos, startPosAndRot.rot);
         }
+    }
+
+    private void Teleport(Vector3 position, Quaternion rotation)
+    {
+        controller.enabled = false;
+        transform.SetPositionAndRotation(position, rotation);
+        controller.enabled = true;
+
+        lookDirection.x = rotation.eulerAngles.y;
+        lookDirection.y = rotation.eulerAngles.z;
+        velocity = Vector3.zero;
     }
 
     private void UpdateGround()
     {
-        if(wasGrounded != IsGrounded)
+        if (wasGrounded != IsGrounded)
         {
             OnGroundStateChange?.Invoke(IsGrounded);
             wasGrounded = IsGrounded;
@@ -121,71 +120,67 @@ public class Player : MonoBehaviour
     private void UpdateGravity()
     {
         var gravity = mass * Time.deltaTime * Physics.gravity;
-        velocity.y = controller.isGrounded ? -1f : velocity.y + gravity.y;
+        velocity.y = IsGrounded ? -1f : velocity.y + gravity.y;
     }
 
     private void UpdateMovement()
     {
         OnBeforeMove?.Invoke();
-        Vector3 moveInput = GetMovementInput(moveSpeed);
 
+        Vector3 moveInput = GetMovementInput(moveSpeed, true);
         float accelerationFactor = acceleration * Time.deltaTime;
+
         velocity.x = Mathf.Lerp(velocity.x, moveInput.x, accelerationFactor);
         velocity.z = Mathf.Lerp(velocity.z, moveInput.z, accelerationFactor);
 
         controller.Move(velocity * Time.deltaTime);
     }
 
-    Vector3 GetMovementInput(float speed, bool horizontal = true)
+    private Vector3 GetMovementInput(float speed, bool horizontal)
     {
         Vector2 moveInput = moveAction.ReadValue<Vector2>();
-        Vector3 input = new();
-        var referenceTransform = horizontal ? transform : camTransform;
-        input += referenceTransform.forward * moveInput.y;
-        input += referenceTransform.right * moveInput.x;
-        input = Vector3.ClampMagnitude(input, 1f);
-        input *= speed * speedMultiplier;
-        return input;
-    }
+        Transform referenceTransform = horizontal ? transform : camTransform;
 
-    void UpdateMovementClimbing()
+        Vector3 input = (referenceTransform.forward * moveInput.y) + (referenceTransform.right * moveInput.x);
+        input = Vector3.ClampMagnitude(input, 1f);
+
+        return input * (speed * speedMultiplier);
+    }
+    private void UpdateMovementClimbing()
     {
         Vector3 input = GetMovementInput(climbingSpeed, false);
         float inputForwardFactor = Vector3.Dot(transform.forward, input.normalized);
 
-        if(inputForwardFactor > 0f)
+        if (inputForwardFactor > 0f)
         {
-            input.x *= .5f;
-            input.z *= .5f;
-
-            if (Mathf.Abs(input.y) > 0.2f)
-                input.y = Mathf.Sign(input.y) * climbingSpeed;
+            input.x *= 0.5f;
+            input.z *= 0.5f;
+            if (Mathf.Abs(input.y) > 0.2f) input.y = Mathf.Sign(input.y) * climbingSpeed;
         }
         else
         {
             input.x *= 3f;
-            input.y = 0;
+            input.y = 0f;
             input.z *= 3f;
         }
-        input.x *= .5f;
-        input.z *= .5f;
 
-        if (Mathf.Abs(input.y) > 0.2f)
-            input.y = Mathf.Sign(input.y) * climbingSpeed;
+        input.x *= 0.5f;
+        input.z *= 0.5f;
+
+        if (Mathf.Abs(input.y) > 0.2f) input.y = Mathf.Sign(input.y) * climbingSpeed;
 
         float accelerationFactor = acceleration * Time.deltaTime;
         velocity = Vector3.Lerp(velocity, input, accelerationFactor);
 
         controller.Move(velocity * Time.deltaTime);
     }
-    void UpdateLook()
+    private void UpdateLook()
     {
         Vector2 lookInput = lookAction.ReadValue<Vector2>();
+
         lookDirection.x += lookInput.x * mouseSens;
         lookDirection.y += lookInput.y * mouseSens;
-
-        lookDirection.y = Mathf.Clamp(lookDirection.y, -90, 90);
-
+        lookDirection.y = Mathf.Clamp(lookDirection.y, -90f, 90f);
         camTransform.localRotation = Quaternion.Euler(-lookDirection.y, 0, 0);
         transform.localRotation = Quaternion.Euler(0, lookDirection.x, 0);
     }

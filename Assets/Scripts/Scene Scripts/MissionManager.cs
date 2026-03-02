@@ -2,6 +2,7 @@ using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 [System.Serializable]
 public class MissionSubStep
@@ -9,6 +10,9 @@ public class MissionSubStep
     public string subStepID;
     public string description;
     public bool isCompleted;
+
+    [Header("Events:")]
+    public UnityEvent onSubStepCompleted;
 }
 
 [System.Serializable]
@@ -18,6 +22,9 @@ public class MissionStep
     public string stepName;
     public string description;
     public bool isCompleted;
+
+    [Header("Events:")]
+    public UnityEvent onStepCompleted;
 
     [Header("Sub-Step Settings:")]
     public bool enforceSubOrder;
@@ -45,42 +52,47 @@ public class MissionManager : MonoBehaviour
 
     private void Awake()
     {
-        if(Instance == null)
+        if (Instance == null)
             Instance = this;
         else
             Destroy(gameObject);
     }
+
     private void Start()
     {
         UpdateObjectiveUI();
 
-        if(missionCompleteScreen != null)
-            missionCompleteScreen.SetActive(false);
-        if(missionFailedScreen != null)
-            missionFailedScreen.SetActive(false);
-        if(gameHUD != null) 
-            gameHUD.SetActive(true);
+        if (missionCompleteScreen != null) missionCompleteScreen.SetActive(false);
+        if (missionFailedScreen != null) missionFailedScreen.SetActive(false);
+        if (gameHUD != null) gameHUD.SetActive(true);
     }
+
     private void Update()
     {
-        if(isGameOver && Input.GetKeyDown(KeyCode.Space))
+        if (isGameOver && Input.GetKeyDown(KeyCode.Space))
         {
             Time.timeScale = 1f;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
+
     public void CompleteStep(string idToComplete)
     {
         if (isGameOver) return;
+
         MissionStep mainStep = missionSteps.Find(x => x.stepName == idToComplete);
         if (mainStep != null)
         {
             if (mainStep.subSteps.Count > 0)
+            {
+                Debug.LogWarning($"CODE_WARNING: Cannot directly complete Main Step '{idToComplete}' because it has active Sub-Steps.");
                 return;
+            }
 
             CompleteMainStepLogic(mainStep);
             return;
         }
+
         foreach (var step in missionSteps)
         {
             if (step.isCompleted) continue;
@@ -93,24 +105,26 @@ public class MissionManager : MonoBehaviour
                     int mainIndex = missionSteps.IndexOf(step);
                     if (mainIndex > 0 && !missionSteps[mainIndex - 1].isCompleted)
                     {
-                        Debug.Log("CODE_LOG: You can't complete Sub-Steps until the prevous objective is completed");
+                        Debug.LogWarning("CODE_WARNING: Blocked. You must complete the previous Main Objective first.");
                         return;
                     }
                 }
+
                 if (step.enforceSubOrder)
                 {
                     int subIndex = step.subSteps.IndexOf(subStep);
                     if (subIndex > 0 && !step.subSteps[subIndex - 1].isCompleted)
                     {
-                        Debug.Log("CODE_LOG: Complete Sub-Steps in order");
+                        Debug.LogWarning("CODE_WARNING: Blocked. Complete Sub-Steps in chronological order.");
                         return;
                     }
                 }
                 if (!subStep.isCompleted)
                 {
                     subStep.isCompleted = true;
+                    Debug.Log($"CODE_LOG: Sub-Step '{subStep.description}' COMPLETED.");
 
-                    Debug.Log($"CODE_LOG: Sub-Step '{subStep.description}' completed");
+                    subStep.onSubStepCompleted?.Invoke();
 
                     CheckIfMainStepIsFinished(step);
                     UpdateObjectiveUI();
@@ -118,78 +132,99 @@ public class MissionManager : MonoBehaviour
                 return;
             }
         }
-        Debug.LogWarning($"CODE_WARNING: Step ID '{idToComplete}' not found");
+
+        Debug.LogError($"CODE_ERROR: Step ID '{idToComplete}' not found anywhere.");
     }
-    void CheckIfMainStepIsFinished(MissionStep step)
+
+    private void CheckIfMainStepIsFinished(MissionStep step)
     {
         bool allSubsDone = true;
-        foreach(var subStep in step.subSteps)
-            if(!subStep.isCompleted) allSubsDone = false;
+        foreach (var subStep in step.subSteps)
+        {
+            if (!subStep.isCompleted)
+            {
+                allSubsDone = false;
+                break;
+            }
+        }
+
         if (allSubsDone)
+        {
+            Debug.Log($"CODE_LOG: All Sub-Steps for '{step.stepName}' are done.");
             CompleteMainStepLogic(step);
+        }
     }
-    void CompleteMainStepLogic(MissionStep step)
+
+    private void CompleteMainStepLogic(MissionStep step)
     {
         if (enforceMainOrder)
         {
             int i = missionSteps.IndexOf(step);
             if (i > 0 && !missionSteps[i - 1].isCompleted) return;
         }
+
         if (!step.isCompleted)
         {
             step.isCompleted = true;
+            Debug.Log($"CODE_LOG: Main Objective '{step.description}' COMPLETED.");
 
-            Debug.Log($"CODE_LOG: Main objective ({step.description}) completed");
-            AudioManager.Instance?.PlayObjectiveComplete();
+            step.onStepCompleted?.Invoke();
+
+            AudioManager.Instance.PlayObjectiveComplete(); 
+
             CheckWinCondition();
 
             if (!isGameOver)
                 UpdateObjectiveUI();
         }
     }
-    void CheckWinCondition()
-    {
-        bool allDone = true;
 
+    private void CheckWinCondition()
+    {
         foreach (var step in missionSteps)
+        {
             if (!step.isCompleted) return;
-        if(allDone)
-            EndGame(true);
+        }
+
+        Debug.Log("CODE_LOG: All objectives completed. Player WINS.");
+        EndGame(true);
     }
+
     public void FailMission(string reason)
     {
-        if (isGameOver)
-            return;
-        //Debug.Log($"CODE_LOG: Mission failed: {reason}");
-        if(objectiveText != null)
-            objectiveText.text = $"MISSION FAILED: {reason}";
+        if (isGameOver) return;
+
+        Debug.Log($"CODE_LOG: Mission FAILED. Reason: {reason}");
+
+        if (objectiveText != null)
+            objectiveText.text = $"MISSION FAILED: \n{reason}";
+
         EndGame(false);
     }
+
     private void EndGame(bool hasPlayerWon)
     {
         isGameOver = true;
 
-        if(gameHUD != null)
-            gameHUD.SetActive(false);
-        if(playerController != null)
-            playerController.enabled = false;
+        if (gameHUD != null) gameHUD.SetActive(false);
+        if (playerController != null) playerController.enabled = false;
+
         if (hasPlayerWon)
         {
-            AudioManager.Instance?.PlayMissionComplete();
-            if(missionCompleteScreen != null)
-                missionCompleteScreen.SetActive(true);
+            AudioManager.Instance.PlayMissionComplete();
+            if (missionCompleteScreen != null) missionCompleteScreen.SetActive(true);
         }
-        else if (!hasPlayerWon)
+        else
         {
-            AudioManager.Instance?.PlayMissionFail();
-            if(missionFailedScreen != null)
-                missionFailedScreen.SetActive(true);
+            AudioManager.Instance.PlayMissionFail();
+            if (missionFailedScreen != null) missionFailedScreen.SetActive(true);
         }
 
         Time.timeScale = 0f;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
+
     private void UpdateObjectiveUI()
     {
         if (objectiveText == null) return;
@@ -211,6 +246,8 @@ public class MissionManager : MonoBehaviour
             objectiveText.text = finalText;
         }
         else
+        {
             objectiveText.text = "";
+        }
     }
 }

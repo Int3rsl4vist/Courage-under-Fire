@@ -1,0 +1,116 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &250048366677313948
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: b75b7a0e9659dde4cb713fac00825936, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b75b7a0e9659dde4cb713fac00825936, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b75b7a0e9659dde4cb713fac00825936, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b75b7a0e9659dde4cb713fac00825936, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b75b7a0e9659dde4cb713fac00825936, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b75b7a0e9659dde4cb713fac00825936, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b75b7a0e9659dde4cb713fac00825936, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b75b7a0e9659dde4cb713fac00825936, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b75b7a0e9659dde4cb713fac00825936, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b75b7a0e9659dde4cb713fac00825936, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2751555879391411167, guid: b75b7a0e9659dde4cb713fac00825936, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 413593524178054670, guid: b75b7a0e9659dde4cb713fac00825936, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b75b7a0e9659dde4cb713fac00825936, type: 3}
+      propertyPath: m_Name
+      value: Wpn_Enfield38
+      objectReference: {fileID: 0}
+    - target: {fileID: 1272477561876395438, guid: b75b7a0e9659dde4cb713fac00825936, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b75b7a0e9659dde4cb713fac00825936, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3787751379260707854}
+  m_SourcePrefab: {fileID: 100100000, guid: b75b7a0e9659dde4cb713fac00825936, type: 3}
+--- !u!1 &1132990089530111181 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: b75b7a0e9659dde4cb713fac00825936, type: 3}
+  m_PrefabInstance: {fileID: 250048366677313948}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3787751379260707854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1132990089530111181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83acf28a6dec11f458d0df6097593c34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponName: Enfield .38
+  curAmmo: 6
+  magazineSize: 6
+  magazinesLeft: 2
+  fireRate: 600
+  range: 27.5
+  damage: 30
+  reloadTime: 3.75
+  isAutomatic: 0
+  noiseRadius: 30
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  weaponAudio: {fileID: 0}
+  shotClip: {fileID: 0}
+  reloadClip: {fileID: 0}
+  emptyClickClip: {fileID: 0}
+  muzzleFlashMesh: {fileID: 0}
+  flashDuration: 0.05
+  impactEffect: {fileID: 0}
+  weaponID: 
+  handPosition: {x: 0, y: 0, z: 0}
+  handRotation: {x: 0, y: 0, z: 0}
+  rb: {fileID: 0}
+  col: {fileID: 0}

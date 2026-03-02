@@ -18,7 +18,7 @@ public class RegionTrigger_NPC : MonoBehaviour
             if (npcScript != null)
             {
                 Debug.Log("CODE_LOG: Player has entered a Trigger Region, signalling NPC");
-                npcScript.SetDestinationToTarget();
+                npcScript.MoveToNextWaypoint();
                 _wasTriggered = true;
             }
             else

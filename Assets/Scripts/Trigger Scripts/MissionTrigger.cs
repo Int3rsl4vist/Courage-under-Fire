@@ -3,7 +3,7 @@ using UnityEngine;
 public class MissionTrigger : MonoBehaviour
 {
     [Header("Mission Settings:")]
-    public string stepNameID;
+    public string missionStepID;
     public bool destroyOnTrigger = true;
 
     private MissionTriggerGroup myGroup;
@@ -24,7 +24,7 @@ public class MissionTrigger : MonoBehaviour
             if (myGroup != null)
                 myGroup.ReportTriggerHit(this);
             else
-                MissionManager.Instance.CompleteStep(stepNameID);
+                MissionManager.Instance.CompleteStep(missionStepID);
             if (destroyOnTrigger)
                 Destroy(gameObject);
             else

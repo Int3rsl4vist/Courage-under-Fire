@@ -1,67 +1,87 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Assertions.Must;
 
+[RequireComponent(typeof(NavMeshAgent))]
 public class AIMovement : MonoBehaviour
 {
     public NavMeshAgent agent;
-    [Tooltip("Drag the destination object here")]
-    public Transform targetDestination;
+    [Tooltip("Drag all the destination objects here")]
+    public Transform[] waypoints;
 
-    private bool _hasArrived = false;
-    private bool _hasStarted = false;
+    private int _currentWaypointIndex = -1;
+    private bool _isMoving = false;
 
     private void Start()
     {
-        if(agent == null)
+        if (agent == null)
             agent = GetComponent<NavMeshAgent>();
-        if(targetDestination == null)
-        {
-            Debug.LogError("CODE_ERROR: No Target Destination assigned in Inspector");
-            return;
-        }
+        if (waypoints == null || waypoints.Length == 0)
+            Debug.LogError($"CODE_ERROR: No waypoints assigned. NPC '{gameObject.name}' has nowhere to go");
     }
     private void Update()
     {
-        if (_hasStarted && !_hasArrived)
+        if (_isMoving)
         {
             if(!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
             {
                 if(!agent.hasPath || agent.velocity.sqrMagnitude == 0f)
                 {
-                    _hasArrived = true;
-                    Debug.Log("NPC has reached the destination");
+                    _isMoving = false;
+                    Debug.Log($"CODE_LOG: NPC '{gameObject.name}' reached waypoint {_currentWaypointIndex} and awaits next waypoint");
                 }
             }
+
         }
     }
-    public void SetDestinationToTarget()
+    public void MoveToNextWaypoint()
     {
-        // Pokud není pøiøazen cíl cesty, postava se nebude hýbat
-        if (targetDestination == null)
-            return;
-        if (NavMesh.SamplePosition(targetDestination.position, out NavMeshHit hit, 2.0f, NavMesh.AllAreas))
+        if (waypoints == null || waypoints.Length == 0) return;
+
+        _currentWaypointIndex++;
+
+        if(_currentWaypointIndex >= waypoints.Length)
         {
-            // Výpoèet cesty k cíli
+            Debug.LogWarning($"CODE_WARNING: NPC '{gameObject.name}' reached its destination. It has nowhere to go");
+            return;
+        }
+        Transform target = waypoints[_currentWaypointIndex];
+
+        if (target == null)
+        {
+            Debug.LogError($"CODE_ERROR: Waypoint {_currentWaypointIndex} is null. Trying the next one");
+            MoveToNextWaypoint();
+            return;
+        }
+        SetDestination(target.position);
+    }
+    private void SetDestination(Vector3 position)
+    {
+        if(NavMesh.SamplePosition(position, out NavMeshHit hit, 2f, NavMesh.AllAreas))
+        {
             NavMeshPath path = new();
             agent.CalculatePath(hit.position, path);
-            // Úspìšné vytvoøení cesty -> postava se zaène pohybovat k cíli
-            if (path.status == NavMeshPathStatus.PathComplete)
+
+            if(path.status == NavMeshPathStatus.PathComplete)
             {
                 agent.SetDestination(hit.position);
-                _hasStarted = true;
-                Debug.Log("CODE_LOG: Target reachable, initiating movement");
+                _isMoving = true;
+                Debug.Log($"CODE_LOG: NPC '{gameObject.name}' is moving to waypoint {_currentWaypointIndex}");
             }
-            // Cesta je vytvoøena, ale je blokována -> postava dojde co nejblíž k cíli
             else if (path.status == NavMeshPathStatus.PathPartial)
             {
                 agent.SetDestination(hit.position);
-                _hasStarted = true;
-                Debug.LogWarning("CODE_WARNING: Target is unreachable. Something is blocking the path. Moving as close as possible");
+                _isMoving = true;
+                Debug.LogWarning($"CODE_WARNING: NPC '{gameObject.name}' may not reach waypoint {_currentWaypointIndex} (the path is blocked). Initiating movement");
             }
             else
-                Debug.LogError("CODE_ERROR: Target is invalid");
+            {
+                Debug.LogError($"CODE_ERROR: No path found to waypoint {_currentWaypointIndex} found");
+            }
         }
         else
-            Debug.LogError("CODE_ERROR: The Target Destination is not on a valid NavMesh");
+        {
+            Debug.LogError($"CODE_ERROR: Waypoint {_currentWaypointIndex} is not on the NavMesh");
+        }
     }
 }
