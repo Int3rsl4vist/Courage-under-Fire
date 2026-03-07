@@ -1,26 +1,37 @@
 using UnityEngine;
-
+using UnityEngine.InputSystem;
+[RequireComponent(typeof(PlayerInput))]
 public class PlayerCombat : MonoBehaviour
 {
     [Header("Equipment:")]
     public Weapon activeWeapon;
 
+    private PlayerInput _playerInput;
+    private InputAction _fireAction;
+    private InputAction _reloadAction;
+
+    private void Awake()
+    {
+        _playerInput = GetComponent<PlayerInput>();
+        _fireAction = _playerInput.actions["Fire"];
+        _reloadAction = _playerInput.actions["Reload"];
+    }
     private void Update()
     {
         if(activeWeapon == null) return;
 
         if (activeWeapon.isAutomatic)
         {
-            if (Input.GetButton("Fire"))
+            if (_fireAction.ReadValue<float>() > 0.1f)
                 activeWeapon.TryShoot();
         }
         else
         {
-            if (Input.GetButtonDown("Fire"))
+            if (_fireAction.WasPressedThisFrame())
                 activeWeapon.TryShoot();
         }
         
-        if(Input.GetButtonDown("Reload"))
+        if(_reloadAction.WasPressedThisFrame())
             activeWeapon.Reload();
     }
 

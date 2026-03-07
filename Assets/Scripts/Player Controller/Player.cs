@@ -28,8 +28,8 @@ public class Player : MonoBehaviour
     public event Action OnBeforeMove;
     public event Action<bool> OnGroundStateChange;
 
-    internal float speedMultiplier = 1f;
-    internal Vector3 velocity;
+    public float speedMultiplier = 1f;
+    public Vector3 velocity;
 
     public enum State { Walking, Climbing }
     private State _state;

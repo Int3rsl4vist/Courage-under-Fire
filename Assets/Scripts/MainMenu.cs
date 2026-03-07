@@ -6,11 +6,11 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     [Header("Panels:")]
-    public GameObject mainPanel;
+    public GameObject mainMenuPanel;
     public GameObject optionsPanel;
     private void Start()
     {
-        mainPanel.SetActive(true);
+        mainMenuPanel.SetActive(true);
         optionsPanel.SetActive(false);
 
         Cursor.lockState = CursorLockMode.None;
@@ -27,14 +27,14 @@ public class MainMenu : MonoBehaviour
     }
     public void OpenOptions()
     {
-        mainPanel.SetActive(false);
+        mainMenuPanel.SetActive(false);
         if(optionsPanel != null)
             optionsPanel.SetActive(true);
     }
     public void CloseOptions()
     {
         optionsPanel.SetActive(false);
-        if(mainPanel != null)
-            mainPanel.SetActive(true);
+        if(mainMenuPanel != null)
+            mainMenuPanel.SetActive(true);
     }
 }

@@ -26,8 +26,8 @@ public class ObjectController : MonoBehaviour
             animator = GetComponent<Animator>();
         if(portal  == null)
             portal = GetComponent<OcclusionPortal>();
-        if(animator != null)
-            animator.SetBool("Mirror", mirrorAnimation);
+        /*if(animator != null)
+            animator.SetBool("Mirror", mirrorAnimation);*/
     }
     public void Interact()
     {

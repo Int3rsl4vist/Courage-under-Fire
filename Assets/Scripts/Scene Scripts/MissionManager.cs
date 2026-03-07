@@ -3,6 +3,7 @@ using TMPro;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine.Events;
+using System.Collections;
 
 [System.Serializable]
 public class MissionSubStep
@@ -44,6 +45,14 @@ public class MissionManager : MonoBehaviour
     public GameObject gameHUD;
     public MonoBehaviour playerController;
 
+    [Header("Overlay Settings:")]
+    [Tooltip("UI Panel contaaining objective text and other info.")]
+    public CanvasGroup objectiveOverlayGroup;
+    public float fadeSpeed = 5f;
+
+    private Coroutine fadeCoroutine;
+
+
     [Header("Mission Config:")]
     public List<MissionStep> missionSteps = new();
     public bool enforceMainOrder = true;
@@ -61,10 +70,7 @@ public class MissionManager : MonoBehaviour
     private void Start()
     {
         UpdateObjectiveUI();
-
-        if (missionCompleteScreen != null) missionCompleteScreen.SetActive(false);
-        if (missionFailedScreen != null) missionFailedScreen.SetActive(false);
-        if (gameHUD != null) gameHUD.SetActive(true);
+        InitiateUI();
     }
 
     private void Update()
@@ -73,6 +79,18 @@ public class MissionManager : MonoBehaviour
         {
             Time.timeScale = 1f;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+
+        if(!isGameOver && objectiveOverlayGroup != null)
+        {
+            if(Input.GetKeyDown(KeyCode.Tab))
+            {
+                FadePanel(1f);
+            }
+            else if(Input.GetKeyUp(KeyCode.Tab))
+            {
+                FadePanel(0f);
+            }
         }
     }
 
@@ -249,5 +267,26 @@ public class MissionManager : MonoBehaviour
         {
             objectiveText.text = "";
         }
+    }
+    private void InitiateUI()
+    {
+        if (missionCompleteScreen != null) missionCompleteScreen.SetActive(false);
+        if (missionFailedScreen != null) missionFailedScreen.SetActive(false);
+        if (gameHUD != null) gameHUD.SetActive(true);
+        if (objectiveOverlayGroup != null) objectiveOverlayGroup.alpha = 0f;
+    }
+    private void FadePanel(float targetAlpha)
+    {
+        if (fadeCoroutine != null) StopCoroutine(fadeCoroutine);
+        fadeCoroutine = StartCoroutine(FadeRoutine(targetAlpha));
+    }
+    private IEnumerator FadeRoutine(float targetAlpha)
+    {
+        while(Mathf.Abs(objectiveOverlayGroup.alpha - targetAlpha) > 0.01f)
+        {
+            objectiveOverlayGroup.alpha = Mathf.Lerp(objectiveOverlayGroup.alpha, targetAlpha, Time.deltaTime * fadeSpeed);
+            yield return null;
+        }
+        objectiveOverlayGroup.alpha = targetAlpha;
     }
 }

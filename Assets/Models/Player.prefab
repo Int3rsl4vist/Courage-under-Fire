@@ -358,12 +358,12 @@ Transform:
   m_GameObject: {fileID: 3568316055646356344}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.815, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6400224112364555233}
-  m_Father: {fileID: 1195669489275485778}
+  m_Father: {fileID: 8791828210807162541}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &3525658394069870279
 Camera:
@@ -482,9 +482,8 @@ Transform:
   m_Children:
   - {fileID: 3708812537300652168}
   - {fileID: 6747529152051109970}
-  - {fileID: 1908313578836904443}
-  - {fileID: 6649307775230078812}
   - {fileID: 8144677389660417207}
+  - {fileID: 8791828210807162541}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6012132423074771694
@@ -505,7 +504,9 @@ MonoBehaviour:
   climbingSpeed: 2
   mass: 1.5
   acceleration: 20
-  BottomWorldBoundary: -100
+  bottomWorldBoundary: -30
+  speedMultiplier: 1
+  velocity: {x: 0, y: 0, z: 0}
 --- !u!114 &2780599697220354394
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -812,7 +813,7 @@ MonoBehaviour:
   weaponLayerName: Weapon
   worldLayerName: Default
   playerCombat: {fileID: 0}
---- !u!1 &6263911274815572985
+--- !u!1 &5795553386179203286
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -820,27 +821,28 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1908313578836904443}
+  - component: {fileID: 8791828210807162541}
   m_Layer: 3
-  m_Name: CamPosition
+  m_Name: CamHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1908313578836904443
+--- !u!4 &8791828210807162541
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6263911274815572985}
+  m_GameObject: {fileID: 5795553386179203286}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 6649307775230078812}
   m_Father: {fileID: 1195669489275485778}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &3057252641292467830
