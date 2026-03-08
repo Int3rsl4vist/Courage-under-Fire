@@ -20,6 +20,9 @@ public class PlayerStats : MonoBehaviour
     [Tooltip("Speed multiplier applied when sprinting.")]
     public float sprintMultiplier = 1.5f;
     public Image staminaBarFill;
+    [Tooltip("Stamina drain per one jump")]
+    public float jumpStaminaCost = 15f;
+
 
     [Header("Input:")]
     public InputActionReference sprintAction;
@@ -118,6 +121,21 @@ public class PlayerStats : MonoBehaviour
         if(staminaBarFill != null)
             staminaBarFill.fillAmount = currentStamina / maxStamina;
     }
+    private void ApplySprintMultiplier()
+    {
+        if (_isSprinting)
+            _playerMovement.speedMultiplier *= sprintMultiplier;
+    }
+    public void ConsumeStamina(float amount)
+    {
+        currentStamina -= amount;
+
+        if(currentStamina < 0f)
+        {
+            currentStamina = 0f; 
+            _isExhausted = true;
+        }
+    }
     private void OnDestroy()
     {
         if (sprintAction != null)
@@ -133,9 +151,4 @@ public class PlayerStats : MonoBehaviour
         if (_playerMovement != null)
             _playerMovement.OnBeforeMove -= ApplySprintMultiplier;
     }
-    private void ApplySprintMultiplier()
-    {
-        if (_isSprinting)
-            _playerMovement.speedMultiplier *= sprintMultiplier;
-    } 
 }

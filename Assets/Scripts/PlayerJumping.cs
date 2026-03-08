@@ -11,6 +11,7 @@ public class PlayerJumping : MonoBehaviour
     [SerializeField] float groundContactTime = 0.2f;
 
     Player player;
+    PlayerStats stats;
 
     bool tryingToJump;
     float lastJumpTime;
@@ -19,6 +20,7 @@ public class PlayerJumping : MonoBehaviour
     private void Awake()
     {
         player = GetComponent<Player>();
+        stats = GetComponent<PlayerStats>();
     }
     private void OnEnable()
     {
@@ -43,7 +45,20 @@ public class PlayerJumping : MonoBehaviour
         bool jumpAttempted = tryingToJump || (triedToJump && player.IsGrounded);
         bool groundContact = player.IsGrounded || wasGrounded;
         if (jumpAttempted && groundContact)
-            player.velocity.y += jumpSpeed;
+        {
+            if(stats !=  null)
+            {
+                if (stats.currentStamina >= stats.jumpStaminaCost)
+                {
+                    player.velocity.y += jumpSpeed;
+                    stats.ConsumeStamina(stats.jumpStaminaCost);
+                }
+                else
+                    Debug.Log("CODE_LOG: Not enough stamina for a jump");
+            }
+            else
+                player.velocity.y += jumpSpeed;
+        }
         tryingToJump = false;
     }
 
