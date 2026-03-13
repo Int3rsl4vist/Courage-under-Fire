@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 [System.Serializable]
 public struct VoiceLineData
@@ -14,6 +15,9 @@ public class DialogueSpeaker : MonoBehaviour
 {
     [Header("NPC Voicelines:")]
     public VoiceLineData[] voiceLines;
+
+    [Header("Events:")]
+    public UnityEvent onSpeechComplete;
 
     private AudioSource _audioSource;
     private Coroutine _currentSpeech;
@@ -70,11 +74,14 @@ public class DialogueSpeaker : MonoBehaviour
         {
             if(lineData.clip == null) continue;
 
+            Debug.Log($"CODE_LOG: NPC '{gameObject.name}' is speaking line '{lineData.clip.name}'");
             _audioSource.clip = lineData.clip;
             _audioSource.Play();
 
             yield return new WaitForSeconds(lineData.clip.length + lineData.delayAfter);
         }
         _currentSpeech = null;
+        onSpeechComplete?.Invoke();
+        Debug.Log("CODE_LOG: OnSpeechComplete invoked");
     }
 }

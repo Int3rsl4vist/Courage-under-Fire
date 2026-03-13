@@ -1,3 +1,4 @@
+using System;
 using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.AI;
@@ -12,6 +13,7 @@ public class BootcampStage
     [Header("Events (insert dialogues):")]
     public UnityEvent onPlayerArrived;
     public UnityEvent onTargetsCleared;
+    public UnityEvent onNPCArrived;
 }
 [RequireComponent(typeof(NavMeshAgent))]
 public class DrillSergeantBrain : MonoBehaviour
@@ -23,11 +25,15 @@ public class DrillSergeantBrain : MonoBehaviour
     public enum State { Idle, MovingToPos, WaitingForPlayer, WaitingForTargets}
     public State currentState = State.Idle;
 
+    [Header("Rotation Setup:")]
+    public float turnSpeed = 300f;
+
     private NavMeshAgent _agent;
 
     private void Awake()
     {
         _agent = GetComponent<NavMeshAgent>();
+        Debug.Log($"DrillSergeantBrain is active");
     }
     private void Update()
     {
@@ -35,14 +41,31 @@ public class DrillSergeantBrain : MonoBehaviour
         {
             if (!_agent.pathPending && _agent.remainingDistance <= _agent.stoppingDistance)
             {
-                if(!_agent.hasPath || _agent.velocity.sqrMagnitude == 0f)
+                if (!_agent.hasPath || _agent.velocity.sqrMagnitude == 0f)
                 {
                     currentState = State.WaitingForPlayer;
                     Debug.Log($"CODE_LOG: Drill Sergeant arrived at position '{stages[currentStageIndex].stageName}' and is waiting on the Player");
+                    stages[currentStageIndex].onNPCArrived.Invoke();
                 }
             }
         }
+        else if (currentState == State.WaitingForPlayer || currentState == State.WaitingForTargets)
+        {
+            AlignWithTargetRotation();
+        }
     }
+
+    private void AlignWithTargetRotation()
+    {
+        if (currentStageIndex >= stages.Length) return;
+
+        Transform targetTransform = stages[currentStageIndex].sergeantDestiantion;
+        if(targetTransform != null)
+        {
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetTransform.rotation, Time.deltaTime * turnSpeed);
+        }
+    }
+
     public void StartMovingToNextStage()
     {
         if(currentStageIndex >= stages.Length)

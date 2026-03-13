@@ -42,6 +42,7 @@ public class DialogueSequence : MonoBehaviour
         {
             if (line.speaker == null || line.voiceLine == null) continue;
 
+            Debug.Log($"NPC '{gameObject.name}' is speaking line '{line.voiceLine}'");
             line.speaker.Speak(line.voiceLine);
             yield return new WaitForSeconds(line.voiceLine.length + line.delayAfter);
         }
