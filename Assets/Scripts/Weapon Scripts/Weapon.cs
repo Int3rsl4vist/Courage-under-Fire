@@ -16,6 +16,8 @@ public abstract class Weapon : MonoBehaviour, IDataPersistance
     public float damage = 20f;
     public float reloadTime = 2f;
     public bool isAutomatic = false;
+    [Tooltip("What layers can be hit (recommended: Weapon, Player)")]
+    public LayerMask hitLayers = ~0;
 
     [Header("Stealth & Noise:")]
     public float noiseRadius = 30f;
@@ -63,6 +65,11 @@ public abstract class Weapon : MonoBehaviour, IDataPersistance
 
     public event Action OnAmmoChange;
 
+    protected void TriggerAmmoChange()
+    {
+        OnAmmoChange?.Invoke();
+    }
+
     private void Awake()
     {
         if(rb ==  null) rb = GetComponent<Rigidbody>();
@@ -107,7 +114,7 @@ public abstract class Weapon : MonoBehaviour, IDataPersistance
         MakeNoise();
 
         Ray ray = new(Camera.main.transform.position, Camera.main.transform.forward);
-        if(Physics.Raycast(ray, out RaycastHit hit, range))
+        if(Physics.Raycast(ray, out RaycastHit hit, range, hitLayers))
         {
             Debug.Log($"CODE_LOG: Hit: {hit.transform.name}");
 
@@ -127,7 +134,7 @@ public abstract class Weapon : MonoBehaviour, IDataPersistance
             }
         }
     }
-    private IEnumerator FlashEffect()
+    protected IEnumerator FlashEffect()
     {
         muzzleFlashMesh.enabled = true;
         //muzzleFlashMesh.transform.eulerAngles = new(0, Random.Range(0, 360), 0);
@@ -136,7 +143,7 @@ public abstract class Weapon : MonoBehaviour, IDataPersistance
 
         muzzleFlashMesh.enabled = false;
     }
-    void MakeNoise()
+    protected void MakeNoise()
     {
         Collider[] enemiesInRange = Physics.OverlapSphere(transform.position, noiseRadius, enemyLayer);
 
@@ -159,7 +166,7 @@ public abstract class Weapon : MonoBehaviour, IDataPersistance
         isReloading = true;
         PlaySound(reloadClip);
 
-        yield return new WaitForSeconds(reloadTime);
+        yield return new WaitForSeconds(reloadClip.length);
 
         magazinesLeft--;
         curAmmo = magazineSize;
@@ -169,7 +176,7 @@ public abstract class Weapon : MonoBehaviour, IDataPersistance
 
         Debug.Log("CODE_LOG: Reload complete");
     }
-    void PlaySound(AudioClip clip)
+    protected void PlaySound(AudioClip clip)
     {
         if(clip != null && weaponAudio != null)
             weaponAudio.PlayOneShot(clip);
@@ -182,6 +189,7 @@ public abstract class Weapon : MonoBehaviour, IDataPersistance
 
         foreach (var col in weaponColliders)
             col.enabled = false;
+        SetLayerRecursively(gameObject, LayerMask.NameToLayer("WeaponLayer"));
     }
     public void OnDrop()
     {
@@ -190,6 +198,7 @@ public abstract class Weapon : MonoBehaviour, IDataPersistance
 
         foreach (var col in weaponColliders)
             col.enabled = true;
+        SetLayerRecursively(gameObject, LayerMask.NameToLayer("Default"));
     }
     private void OnDrawGizmosSelected()
     {
@@ -216,6 +225,15 @@ public abstract class Weapon : MonoBehaviour, IDataPersistance
         else
         {
             data.weaponsAmmo.Add(weaponID, this.curAmmo);
+        }
+    }
+    private void SetLayerRecursively(GameObject obj, int newLayer)
+    {
+        if(obj == null) return;
+        obj.layer = newLayer;
+        foreach(Transform child  in obj.transform)
+        {
+            SetLayerRecursively(child.gameObject, newLayer);
         }
     }
 }

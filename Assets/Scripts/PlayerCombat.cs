@@ -19,6 +19,7 @@ public class PlayerCombat : MonoBehaviour
     private void Update()
     {
         if(activeWeapon == null) return;
+        if (MapToggle.IsOpen) return;
 
         if (activeWeapon.isAutomatic)
         {

@@ -1,5 +1,3 @@
-using System;
-using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
@@ -9,6 +7,9 @@ public class BootcampStage
 {
     public string stageName = "ShootingRange_1";
     public Transform sergeantDestiantion;
+
+    [Tooltip("Should the NPC wait for the player after arriving at its destination? If NOT, the NPC will start its Dialogue Sequence right after arrival")]
+    public bool waitForPlayerTrigger = true; 
 
     [Header("Events (insert dialogues):")]
     public UnityEvent onPlayerArrived;
@@ -26,7 +27,7 @@ public class DrillSergeantBrain : MonoBehaviour
     public State currentState = State.Idle;
 
     [Header("Rotation Setup:")]
-    public float turnSpeed = 300f;
+    public float turnSpeed = 270f;
 
     private NavMeshAgent _agent;
 
@@ -43,9 +44,18 @@ public class DrillSergeantBrain : MonoBehaviour
             {
                 if (!_agent.hasPath || _agent.velocity.sqrMagnitude == 0f)
                 {
-                    currentState = State.WaitingForPlayer;
-                    Debug.Log($"CODE_LOG: Drill Sergeant arrived at position '{stages[currentStageIndex].stageName}' and is waiting on the Player");
-                    stages[currentStageIndex].onNPCArrived.Invoke();
+                    if (stages[currentStageIndex].waitForPlayerTrigger)
+                    {
+                        currentState = State.WaitingForPlayer;
+                        stages[currentStageIndex].onNPCArrived.Invoke();
+                        Debug.Log($"CODE_LOG: Drill Sergeant arrived at position '{stages[currentStageIndex].stageName}' and is waiting on the Player");
+                    }
+                    else
+                    {
+                        currentState = State.WaitingForTargets;
+                        Debug.Log($"CODE_LOG: Drill Sergeant is at position '{stages[currentStageIndex].stageName}' and is commencing dialogues");
+                        stages[currentStageIndex].onPlayerArrived?.Invoke();
+                    }
                 }
             }
         }
@@ -87,8 +97,14 @@ public class DrillSergeantBrain : MonoBehaviour
     }
     public void TargetsCleared()
     {
-        if(currentState != State.WaitingForTargets) return;
-        
+        Debug.Log($"CODE_LOG: Missionanager reports all targets cleared. Current state: '{currentState}'");
+        if(currentState != State.WaitingForTargets)
+        {
+            Debug.Log("CODE_LOG: No targets to wait for");
+            return;
+        }
+
+        Debug.Log("CODE_LOG: Current state is WaitingForTargets, triggering event and switching state to Idle");
         stages[currentStageIndex].onTargetsCleared?.Invoke();
         currentStageIndex++;
         currentState = State.Idle;
